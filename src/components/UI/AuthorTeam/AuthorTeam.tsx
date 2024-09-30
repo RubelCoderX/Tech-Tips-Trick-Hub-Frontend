@@ -6,16 +6,26 @@ import {
   FaPinterestP,
 } from "react-icons/fa";
 
+import team1 from "../../../assets/rubel_princ.png";
+import team2 from "../../../assets/man1.jpg";
+import team3 from "../../../assets/man2.jpg";
+
 const authors = [
   {
     name: "Angu Tamba",
     role: "Publisher",
-    imageSrc: "/images/author1.jpg",
+    imageSrc: team1,
+    socialLinks: [
+      { icon: <FaFacebookF />, url: "https://facebook.com" },
+      { icon: <FaTimes />, url: "#" },
+      { icon: <FaLinkedinIn />, url: "https://linkedin.com" },
+      { icon: <FaPinterestP />, url: "https://pinterest.com" },
+    ],
   },
   {
     name: "Naseem Al Morad",
     role: "Author",
-    imageSrc: "/images/author2.jpg",
+    imageSrc: team3,
     socialLinks: [
       { icon: <FaFacebookF />, url: "https://facebook.com" },
       { icon: <FaTimes />, url: "#" },
@@ -26,13 +36,19 @@ const authors = [
   {
     name: "Nayah Tantoh",
     role: "Senior Reporter",
-    imageSrc: "/images/author3.jpg",
+    imageSrc: team2,
+    socialLinks: [
+      { icon: <FaFacebookF />, url: "https://facebook.com" },
+      { icon: <FaTimes />, url: "#" },
+      { icon: <FaLinkedinIn />, url: "https://linkedin.com" },
+      { icon: <FaPinterestP />, url: "https://pinterest.com" },
+    ],
   },
 ];
 
-export default function AuthorsSection() {
+export default function AuthorTeam() {
   return (
-    <div className="py-16 bg-gray-100">
+    <div className="py-16 light light:bg-[#F9F9F9] dark dark:bg-[#1A1A1A]">
       <div className="container mx-auto px-4 text-center">
         <h2 className="text-3xl font-bold mb-4">Meet Our Publishing Authors</h2>
         <p className="mb-12 text-gray-600">
@@ -49,7 +65,7 @@ export default function AuthorsSection() {
               <div className="relative">
                 <Image
                   alt={author.name}
-                  className="w-full h-auto object-cover"
+                  className="w-full h-[400px] object-cover"
                   height={500}
                   src={author.imageSrc}
                   width={400}

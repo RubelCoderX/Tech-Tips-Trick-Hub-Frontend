@@ -9,7 +9,7 @@ const Contact = () => {
       <div className="container mx-auto px-4">
         <div className="flex flex-col md:flex-row gap-8">
           {/* Left side - Form */}
-          <div className="w-full md:w-2/3 p-8 bg-gray-100  rounded-lg">
+          <div className="w-full md:w-2/3 p-8 light light:bg-[#F9F9F9] dark dark:bg-[#1A1A1A]  rounded-lg">
             <h2 className="text-2xl text-default-50 font-bold mb-4">
               Send Us a Message
             </h2>
@@ -18,14 +18,11 @@ const Contact = () => {
             </p>
             <form>
               <div className="mb-4">
-                <label
-                  className="block text-gray-700 text-sm font-bold mb-2"
-                  htmlFor="name"
-                >
+                <label className="block text-sm font-bold mb-2" htmlFor="name">
                   Name
                 </label>
                 <input
-                  className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500"
+                  className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 "
                   id="name"
                   placeholder="Your Name"
                   type="text"
@@ -50,7 +47,7 @@ const Contact = () => {
               </div>
               <div className="mb-4">
                 <label
-                  className="block text-gray-700 text-sm font-bold mb-2"
+                  className="block  text-sm font-bold mb-2"
                   htmlFor="email"
                 >
                   Email
@@ -91,7 +88,7 @@ const Contact = () => {
           </div>
 
           {/* Right side - Contact Info */}
-          <div className="w-full md:w-1/3 bg-gray-100 my-auto p-8  rounded-lg">
+          <div className="w-full md:w-1/3 light light:bg-[#F9F9F9] dark dark:bg-[#1A1A1A] my-auto p-8  rounded-lg">
             <h3 className="text-xl font-bold mb-4">Contact Information</h3>
             <p className="text-gray-600 mb-4">
               Theodore Lowe, Ap #867-859 Sit Rd, Azusa New York

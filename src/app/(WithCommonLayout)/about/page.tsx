@@ -1,14 +1,13 @@
-import AboutUs from "@/src/components/AboutUs/AboutUs";
+import AboutUs from "@/src/components/UI/AboutUs/AboutUs";
+import AuthorTeam from "@/src/components/UI/AuthorTeam/AuthorTeam";
 
 const Page = () => {
   return (
     <div>
       <div className="py-12">
         {/* Main Heading Section */}
-        <div className=" mx-auto text-center">
-          <h1 className="text-4xl font-semibold mb-8 bg-[#F9F9F9] p-7">
-            About Us
-          </h1>
+        <div className=" mx-auto text-center   light light:bg-[#F9F9F9] dark dark:bg-[#1A1A1A] p-7">
+          <h1 className="text-4xl font-semibold mb-8   ">About Us</h1>
         </div>
         <div className="container mx-auto">
           <AboutUs />
@@ -35,8 +34,9 @@ const Page = () => {
         </div> */}
       </div>
 
-      {/* Contact Form */}
-      {/* <Contact /> */}
+      <div>
+        <AuthorTeam />
+      </div>
     </div>
   );
 };
