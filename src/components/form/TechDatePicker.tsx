@@ -25,8 +25,8 @@ const TechDatePicker = ({
           className="min-w-full sm:min-w-[225px]"
           label={label}
           {...fields}
-          variant={variant}
           radius={radius}
+          variant={variant}
         />
       )}
     />

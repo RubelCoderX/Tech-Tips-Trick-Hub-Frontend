@@ -28,8 +28,8 @@ const TechSelect = ({
       className="min-w-full sm:min-w-[225px]"
       isDisabled={disabled}
       label={label}
-      variant="bordered"
       radius={radius}
+      variant="bordered"
     >
       {options.map((options) => (
         <SelectItem key={options.key}>{options.label}</SelectItem>

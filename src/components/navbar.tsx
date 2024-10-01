@@ -13,12 +13,12 @@ import { Input } from "@nextui-org/input";
 import { link as linkStyles } from "@nextui-org/theme";
 import NextLink from "next/link";
 import clsx from "clsx";
-import { Avatar } from "@nextui-org/avatar";
+
+import NavberDropDown from "./UI/NavberDropDown/NavberDropDown";
 
 import { siteConfig } from "@/src/config/site";
 import { ThemeSwitch } from "@/src/components/theme-switch";
 import { SearchIcon, Logo } from "@/src/components/icons";
-import NavberDropDown from "./UI/NavberDropDown/NavberDropDown";
 
 export const Navbar = () => {
   // const { theme } = useTheme();
@@ -65,7 +65,7 @@ export const Navbar = () => {
               <NextLink
                 className={clsx(
                   linkStyles({ color: "foreground" }),
-                  "data-[active=true]:text-primary data-[active=true]:font-medium"
+                  "data-[active=true]:text-primary data-[active=true]:font-medium",
                 )}
                 color="foreground"
                 href={item.href}

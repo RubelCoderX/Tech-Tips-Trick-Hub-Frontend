@@ -12,3 +12,31 @@ export interface IInput {
   name: string;
   disabled?: boolean;
 }
+
+// export interface IUser {
+//   name: string;
+//   email: string;
+//   password: string;
+//   role: string;
+//   gender: string;
+//   birthDate: string;
+//   isVerified: boolean;
+//   profileImage: string;
+//   followers: any[];
+//   following: any[];
+//   payments: any[];
+//   bio: string;
+//   address: string;
+//   isDeleted: boolean;
+//   _id: string;
+//   createdAt?: string;
+//   updatedAt?: string;
+//   __v: number;
+// }
+
+export interface IUser {
+  id: string;
+  email: string;
+  role: string;
+  profileImage: string;
+}

@@ -1,6 +1,7 @@
 import Image from "next/image";
 import React from "react";
 import { CalendarIcon, ShareIcon } from "lucide-react";
+import Link from "next/link";
 
 import bannerImage from "../../assets/watch.jpg";
 import satelliteImage from "../../assets/satelight.jpg";
@@ -22,9 +23,12 @@ const HeroSection = () => {
             <span className="inline-block bg-lime-500 text-white px-3 py-1 text-sm font-semibold rounded-full mb-2">
               SMART WATCH
             </span>
-            <h2 className="text-white text-2xl md:text-3xl font-bold mb-2 cursor-pointer hover:underline transition duration-300 ease-in-out">
+            <Link
+              className="text-white block text-2xl md:text-3xl font-bold mb-2 cursor-pointer hover:underline transition duration-300 ease-in-out"
+              href={`/${1}`}
+            >
               These 5 Simple TECHNOLOGY Tricks Will Pump Up Your Sales
-            </h2>
+            </Link>
             <div className="flex items-center text-white text-sm">
               <span>By axilthemes</span>
               <span className="mx-2">•</span>

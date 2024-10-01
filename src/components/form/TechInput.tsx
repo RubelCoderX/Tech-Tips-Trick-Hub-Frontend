@@ -1,8 +1,8 @@
 "use client";
-import { IInput } from "@/src/types";
 import { Input } from "@nextui-org/input";
-
 import { useFormContext } from "react-hook-form";
+
+import { IInput } from "@/src/types";
 
 interface IProps {
   variant?: "underlined" | "faded" | "flat" | "bordered";
@@ -39,10 +39,10 @@ export const TechInput = ({
       errorMessage={errors[name] ? (errors[name].message as string) : ""}
       isInvalid={!!errors[name]}
       label={label}
+      radius={radius}
       required={required}
       size={size}
       type={type}
-      radius={radius}
       variant={variant}
     />
   );
