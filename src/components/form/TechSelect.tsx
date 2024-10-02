@@ -20,13 +20,18 @@ const TechSelect = ({
 
   disabled,
 }: IProps) => {
-  const { register } = useFormContext();
+  const {
+    register,
+    formState: { errors },
+  } = useFormContext();
 
   return (
     <Select
       {...register(name)}
       className="min-w-full sm:min-w-[225px]"
+      errorMessage={errors[name] ? (errors[name].message as string) : ""}
       isDisabled={disabled}
+      isInvalid={!!errors[name]}
       label={label}
       radius={radius}
       variant="bordered"

@@ -46,9 +46,7 @@ const PremiumYearlyMember = () => {
             <li className="flex items-center text-blue-600">
               ✓ Listen to audio narrations
             </li>
-            <li className="flex items-center text-blue-600">
-              ✓ Read offline with the Medium app
-            </li>
+
             <li className="flex items-center text-blue-600">
               ✓ Access our Mastodon community
             </li>

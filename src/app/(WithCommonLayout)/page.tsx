@@ -9,7 +9,7 @@ export default function Home() {
   return (
     <div>
       <BecomeAmember />
-      <div className="container mx-auto max-w-7xl pt-16 px-6 flex-grow">
+      <div className="container mx-auto pt-16 max-w-7xl  px-6 flex-grow">
         <HeroSection />
         <TopNews />
         <NewsLayout />

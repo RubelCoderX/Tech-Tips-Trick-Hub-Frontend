@@ -28,7 +28,7 @@ const RegisterPage = () => {
     const userData = {
       ...data,
       birthDate: dateToISO(data.birthDate),
-      profileImage: "https://ibb.co/Jz4xyWM",
+      profileImage: "https://i.ibb.co/195sdYw/prince-1.png",
     };
 
     handleUserRegistration(userData);
@@ -64,7 +64,7 @@ const RegisterPage = () => {
                   label="User Name"
                   name="name"
                   radius="none"
-                  size="lg"
+                  size="md"
                   type="text"
                   variant="bordered"
                 />
@@ -74,7 +74,7 @@ const RegisterPage = () => {
                   label="Email"
                   name="email"
                   radius="none"
-                  size="lg"
+                  size="md"
                   type="email"
                   variant="bordered"
                 />
@@ -101,7 +101,7 @@ const RegisterPage = () => {
                   label="Password"
                   name="password"
                   radius="none"
-                  size="lg"
+                  size="md"
                   type={isVisible ? "text" : "password"}
                   variant="bordered"
                 />
@@ -132,7 +132,7 @@ const RegisterPage = () => {
                   label="Address"
                   name="address"
                   radius="none"
-                  size="lg"
+                  size="md"
                   type="text"
                   variant="bordered"
                 />

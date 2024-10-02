@@ -27,7 +27,8 @@ const BecomeAmember = () => {
       <div className="flex items-center space-x-2 mx-auto">
         <span className="text-yellow-500">✨</span> {/* Yellow sparkle icon */}
         <p className="text-sm text-gray-900 dark:text-black text-center">
-          Get unlimited access to the best of Medium for less than $20/month.{" "}
+          Get unlimited access to the best of Gadget Guru Hub for less than
+          $20/month.{" "}
           <button
             className="underline text-black font-semibold dark:text-black"
             onClick={() => handleNavigation("/become-member")}

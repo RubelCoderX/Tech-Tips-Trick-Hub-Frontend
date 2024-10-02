@@ -5,22 +5,29 @@ import { IInput } from "@/src/types";
 
 interface IProps extends IInput {
   type?: string;
+  radius?: "none" | "sm" | "md" | "lg" | "xl";
 }
 
-export const FxTextArea = ({
+export const TechTextArea = ({
   name,
   label,
-
+  radius,
   variant = "bordered",
 }: IProps) => {
-  const { register } = useFormContext();
+  const {
+    register,
+    formState: { errors },
+  } = useFormContext();
   const currentValue = useWatch({ name });
 
   return (
     <Textarea
       {...register(name)}
+      errorMessage={errors[name] ? (errors[name].message as string) : ""}
+      isInvalid={!!errors[name]}
       label={label}
       minRows={6}
+      radius="none"
       value={currentValue || ""}
       variant={variant}
     />

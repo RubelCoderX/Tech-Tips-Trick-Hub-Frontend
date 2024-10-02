@@ -1,7 +1,11 @@
+/* eslint-disable import/order */
+import Profile from "@/src/components/UI/Profile/Profile";
+
 const Page = () => {
   return (
-    <div>
-      <h2>Welcome to the Profile page</h2>
+    <div className=" mt-10">
+      <Profile />
+      <div />
     </div>
   );
 };

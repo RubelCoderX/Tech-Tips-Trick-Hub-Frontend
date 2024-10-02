@@ -2,7 +2,6 @@
 
 import { FieldValues } from "react-hook-form";
 import { cookies } from "next/headers";
-import { jwtDecode } from "jwt-decode";
 
 import axiosInstance from "@/src/lib/AxiosInstence";
 
@@ -41,18 +40,77 @@ export const logOut = () => {
 export const getCurrentUser = async () => {
   const accessToken = cookies().get("accessToken")?.value;
 
-  let decodedToken = null;
-
   if (accessToken) {
-    decodedToken = await jwtDecode(accessToken);
+    try {
+      const { data } = await axiosInstance.get("/user/get-me");
 
-    return {
-      id: decodedToken.id,
-      email: decodedToken.email,
-      role: decodedToken.role,
-      profileImage: decodedToken.profileImage,
-    };
+      if (data.success) {
+        return data.data;
+      } else {
+        console.error("Failed to get user:", data.message);
+
+        return null;
+      }
+    } catch (error) {
+      console.error("Error fetching user:", error);
+
+      return null;
+    }
   }
 
-  return decodedToken;
+  return null;
+};
+
+// export const getCurrentUser = async () => {
+//   const accessToken = cookies().get("accessToken")?.value;
+//   console.log(accessToken);
+
+//   let decodedToken = null;
+
+//   if (accessToken) {
+//     decodedToken = await jwtDecode(accessToken);
+
+//     return {
+//       // _id: decodedToken._id,
+//       name: decodedToken.name,
+//       email: decodedToken.email,
+
+//       role: decodedToken.role,
+//       profileImage: decodedToken.profileImage,
+//     };
+//   }
+
+//   return decodedToken;
+// };
+
+export const getNewAccessToken = async () => {
+  try {
+    const refreshToken = cookies().get("refreshToken")?.value;
+
+    const res = await axiosInstance({
+      url: "/auth/refresh-token",
+      method: "POST",
+      withCredentials: true,
+      headers: {
+        cookie: `refreshToken=${refreshToken}`,
+      },
+    });
+
+    return res.data;
+  } catch (error) {
+    throw new Error("Failed to get new access token");
+  }
+};
+
+export const updateUser = async (userId: string, userData: FieldValues) => {
+  try {
+    const res = await axiosInstance.put(
+      `/user/update-user/${userId}`,
+      userData,
+    );
+
+    return res.data;
+  } catch (error: any) {
+    throw new Error(error.message || "Failed to update user");
+  }
 };
