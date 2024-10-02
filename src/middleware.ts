@@ -8,40 +8,54 @@ const AuthRoutes = ["/login", "/register", "/forgot-password"];
 
 type Role = keyof typeof roleBasedRoutes;
 const roleBasedRoutes = {
-  user: [/^\/dashboard/],
-  admin: [/^\/admin/],
+  user: [/^\/userDashboard/],
+  admin: [/^\/adminDashboard/],
 };
-// This function can be marked `async` if using `await` inside
 
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
-
-  console.log(pathname);
-
   const user = await getCurrentUser();
 
+  // If user is not logged in
   if (!user) {
     if (AuthRoutes.includes(pathname)) {
+      // Allow access to auth-related routes
       return NextResponse.next();
     } else {
+      // Redirect to login if trying to access restricted routes
       return NextResponse.redirect(
         new URL(`/login?redirect=${pathname}`, request.url),
       );
     }
   }
 
-  if (user?.role && roleBasedRoutes[user?.role as Role]) {
-    const routes = roleBasedRoutes[user?.role as Role];
+  // If user is logged in but trying to access a restricted route
+  const userRole = user?.role as Role;
 
-    if (routes.some((route) => pathname.match(route))) {
+  if (userRole && roleBasedRoutes[userRole]) {
+    const routes = roleBasedRoutes[userRole];
+
+    // Check if the route matches the allowed patterns
+    if (routes.some((route) => route.test(pathname))) {
       return NextResponse.next();
+    } else {
+      // Redirect to user's default dashboard if unauthorized access
+      const redirectUrl =
+        userRole === "admin" ? "/adminDashboard" : "/userDashboard";
+
+      return NextResponse.redirect(new URL(redirectUrl, request.url));
     }
   }
 
+  // Default to homepage if no specific role or route matches
   return NextResponse.redirect(new URL("/", request.url));
 }
 
-// See "Matching Paths" below to learn more
 export const config = {
-  matcher: ["/dashboard", "/dashboard/:page*", "/admin"],
+  matcher: [
+    "/userDashboard",
+    "/userDashboard/:page*",
+    "/adminDashboard",
+    "/adminDashboard/:page*",
+  ],
 };

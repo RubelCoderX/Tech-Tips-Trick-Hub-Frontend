@@ -1,17 +1,20 @@
-import { FaCog, FaHome, FaSignOutAlt, FaUser } from "react-icons/fa";
-import { MdPostAdd } from "react-icons/md";
+import { FaCog, FaHome, FaUser } from "react-icons/fa";
+import { MdOutlinePayments, MdPostAdd } from "react-icons/md";
 
 export const userLinks = [
   { name: "Home", path: "/", icon: FaHome },
-  { name: "Profile", path: "/profile", icon: FaUser },
-  { name: "My Post", path: "/dashboard/my-post", icon: MdPostAdd },
-  { name: "Settings", path: "/dashboard/settings", icon: FaCog },
-  { name: "Logout", path: "/logout", icon: FaSignOutAlt },
+  { name: "My Post", path: "/userDashboard/my-post", icon: MdPostAdd },
+  { name: "Settings", path: "/userDashboard/settings", icon: FaCog },
+  { name: "Profile", path: "/userDashboard/profile", icon: FaUser },
 ];
 
 export const AdminLinks = [
-  { name: "Dashboard", path: "/admin/dashboard", icon: FaHome },
-  { name: "Manage Users", path: "/admin/users", icon: FaUser },
-  { name: "Site Settings", path: "/admin/settings", icon: FaCog },
-  // Ensure all paths are defined correctly
+  { name: "Home", path: "/", icon: FaHome },
+  { name: "Manage Users", path: "/adminDashboard/manage-users", icon: FaUser },
+  { name: "Site Settings", path: "/adminDashboard/settings", icon: FaCog },
+  {
+    name: "Payment History",
+    path: "/adminDashboard/payment-history",
+    icon: MdOutlinePayments,
+  },
 ];

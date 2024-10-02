@@ -7,14 +7,17 @@ import {
   DropdownMenu,
   DropdownTrigger,
 } from "@nextui-org/dropdown";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
 import { logOut } from "@/src/services/AuthServices";
 import { useUser } from "@/src/context/user.provider";
+import { protectedRoutes } from "@/src/constant";
 
 const NavberDropDown = () => {
   const router = useRouter();
   const { user, isSetLoading: UserLoading } = useUser();
+
+  const pathname = usePathname();
 
   const handleNavigation = (pathname: string) => {
     router.push(pathname);
@@ -23,6 +26,9 @@ const NavberDropDown = () => {
   const handleLogOut = () => {
     logOut();
     UserLoading(true);
+    if (protectedRoutes.some((route) => pathname.match(route))) {
+      router.push("/");
+    }
   };
 
   return (
@@ -30,19 +36,14 @@ const NavberDropDown = () => {
       <DropdownTrigger>
         <Avatar className="cursor-pointer" src={user?.profileImage} />
       </DropdownTrigger>
-      <DropdownMenu
-        aria-label="Example with disabled actions"
-        disabledKeys={["edit", "delete"]}
-      >
+      <DropdownMenu aria-label="Example with disabled actions">
         <DropdownItem
           key="dashboard"
-          onClick={() => handleNavigation("/dashboard")}
+          onClick={() => handleNavigation(`/${user?.role}Dashboard`)}
         >
           Dashboard
         </DropdownItem>
-        <DropdownItem key="login" onClick={() => handleNavigation("/login")}>
-          Log In
-        </DropdownItem>
+
         <DropdownItem key="logout" onClick={() => handleLogOut()}>
           Log Out
         </DropdownItem>
