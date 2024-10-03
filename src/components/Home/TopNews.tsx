@@ -4,15 +4,15 @@ import satelliteImage from "../../assets/satelight.jpg";
 
 const TopNews = () => {
   return (
-    <div className="mt-20 container mx-auto px-4">
-      <h1 className="text-4xl font-bold mb-8">Top News</h1>
+    <div className="container mx-auto px-4">
+      <h1 className="text-4xl  mb-8 uppercase">Trending</h1>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {/* First Card */}
         <div className="relative">
           <Image
             alt="Small robot"
-            className="object-cover w-full h-[350px]"
-            height={300}
+            className="object-cover w-full h-[250px]"
+            height={250}
             src={satelliteImage}
             width={400}
           />
@@ -31,8 +31,8 @@ const TopNews = () => {
         <div className="relative">
           <Image
             alt="Satellite dish"
-            className="object-cover w-full h-[350px]"
-            height={300}
+            className="object-cover w-full h-[250px]" // Reduced height
+            height={250}
             src={satelliteImage}
             width={400}
           />
@@ -51,8 +51,8 @@ const TopNews = () => {
         <div className="relative">
           <Image
             alt="Smart watch"
-            className="object-cover w-full h-[350px]"
-            height={300}
+            className="object-cover w-full h-[250px]" // Reduced height
+            height={250}
             src={satelliteImage}
             width={400}
           />
@@ -67,6 +67,25 @@ const TopNews = () => {
           </div>
         </div>
       </div>
+
+      {/* Banner section*/}
+      <section
+        className=" cursor-pointer mt-10 relative bg-cover bg-center bg-no-repeat h-64"
+        style={{
+          backgroundImage: "url(https://i.ibb.co/vHV1HzM/banner-Imge.webp)",
+        }}
+      >
+        {/* <div className="absolute inset-0 bg-black bg-opacity-50 flex flex-col items-center justify-center text-center text-white">
+          <h2 className="text-3xl font-bold mb-4">NEW SMARTMAG</h2>
+          <p className="text-lg mb-6">TRY IT, YOU'LL LOVE IT</p>
+          <Link
+            href="#"
+            className="bg-white text-pink-600 font-bold py-2 px-6 rounded-full hover:bg-gray-100 transition"
+          >
+            EXPLORE SMARTMAG
+          </Link>
+        </div> */}
+      </section>
     </div>
   );
 };

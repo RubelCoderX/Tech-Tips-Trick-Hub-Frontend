@@ -31,7 +31,7 @@ export const Navbar = () => {
   return (
     <NextUINavbar
       className="light light:bg-[#1A1A1A] dark dark:bg-[#1A1A1A] "
-      maxWidth="xl"
+      maxWidth="2xl"
       position="sticky"
     >
       <NavbarContent className="basis-1/5 sm:basis-full" justify="start">

@@ -1,5 +1,7 @@
 import Image from "next/image";
 import { CalendarIcon, ShareIcon } from "lucide-react";
+import { Divider } from "@nextui-org/divider";
+import { FaRegComment } from "react-icons/fa";
 
 import bannerImage from "../../assets/watch.jpg";
 import satelliteImage from "../../assets/satelight.jpg";
@@ -15,13 +17,13 @@ export default function NewsLayout() {
             <div>
               <Image
                 alt="Smart Watch"
-                className="w-full md:w-[400px] h-60 object-cover"
+                className="w-full md:w-[430px] h-40 object-cover"
                 height={300}
                 src={bannerImage}
                 width={600}
               />
             </div>
-            <div className="p-4 space-y-4">
+            <div className="p-4 space-y-2 ">
               <span className="bg-green-500 text-white text-xs font-semibold px-2 py-1 rounded-full uppercase">
                 Smart Watch
               </span>
@@ -35,30 +37,27 @@ export default function NewsLayout() {
                 <CalendarIcon className="w-4 h-4 mr-1" />
                 <span>November 6, 2019</span>
                 <span className="mx-2">•</span>
-                <ShareIcon className="w-4 h-4 mr-1" />
-                <span>4,093 Views</span>
+                <FaRegComment className="w-4 h-4 mr-1 cursor-pointer" />
+                <span>4,093 Comments</span>
                 <span className="mx-2">•</span>
                 <span>Shares</span>
               </div>
-              <p className="">
-                For those of us who want to say thank you to our moms, it's not
-                always easy to put those big feelings in words. Which is...
-              </p>
             </div>
           </div>
+          <Divider />
 
           {/* Second Article */}
           <div className="flex flex-col md:flex-row overflow-hidden">
             <div>
               <Image
                 alt="Smart Watch"
-                className="w-full md:w-[400px] h-60 object-cover"
+                className="w-full md:w-[430px] h-40 object-cover"
                 height={300}
                 src={satelliteImage}
                 width={600}
               />
             </div>
-            <div className="p-4 space-y-4">
+            <div className="p-4 space-y-2">
               <span className="bg-green-500 text-white text-xs font-semibold px-2 py-1 rounded-full uppercase">
                 Smart Watch
               </span>
@@ -77,10 +76,6 @@ export default function NewsLayout() {
                 <span className="mx-2">•</span>
                 <span>Shares</span>
               </div>
-              <p className="">
-                For those of us who want to say thank you to our moms, it's not
-                always easy to put those big feelings in words. Which is...
-              </p>
             </div>
           </div>
         </div>

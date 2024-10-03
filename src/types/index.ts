@@ -43,3 +43,44 @@ export interface TUser {
   profileImage: string;
   userName: string;
 }
+export interface TPost {
+  _id: string;
+  title: string;
+  description: string;
+  author: TAuthor;
+  category: string;
+  tags: string[];
+  isPremium: boolean;
+  upVotes: number;
+  downVotes: number;
+  comments: any[];
+  images: string[];
+  status: string;
+  pdfVersion: string;
+  isDeleted: boolean;
+  createdAt: string;
+  updatedAt: string;
+  __v: number;
+}
+
+export interface TAuthor {
+  _id: string;
+  name: string;
+  email: string;
+  profession: string;
+  role: string;
+  gender: string;
+  birthDate: string;
+  isVerified: boolean;
+  profileImage: string;
+  followers: any[];
+  following: any[];
+  payments: any[];
+  bio: string;
+  address: string;
+  isDeleted: boolean;
+  createdAt: string;
+  updatedAt: string;
+  userName: string;
+  __v: number;
+}

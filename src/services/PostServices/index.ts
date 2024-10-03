@@ -2,6 +2,7 @@
 import { revalidateTag } from "next/cache";
 
 import axiosInstance from "@/src/lib/AxiosInstence";
+import { envConfig } from "@/src/config/envConfig";
 
 export const getAllPosts = async () => {
   const res = await axiosInstance.get("/post");
@@ -9,7 +10,7 @@ export const getAllPosts = async () => {
   return res.data;
 };
 
-export const getPostById = async (id: string) => {
+export const getPostById = async (postId: string) => {
   let fetchOptions = {};
 
   fetchOptions = {
@@ -18,23 +19,21 @@ export const getPostById = async (id: string) => {
       tags: ["post"],
     },
   };
-  const res = await axiosInstance.get(`/post/${id}`, fetchOptions);
+  const res = await fetch(`${envConfig.baseApi}/post/${postId}`, fetchOptions);
 
-  if (!res.data) {
-    throw new Error("Post not found");
-  }
+  const data = await res.json();
 
-  return res.data;
+  return data;
 };
 
 export const createComment = async (
   postId: string,
-  commentData: { user: string; content: string },
+  commentData: { user: string; content: string }
 ) => {
   try {
     const { data } = await axiosInstance.post(
       `/post/post-comment/${postId}`,
-      commentData,
+      commentData
     );
 
     revalidateTag("post");
@@ -48,12 +47,12 @@ export const createComment = async (
 export const editComment = async (
   postId: string,
   commentId: string,
-  newComment: { content: string },
+  newComment: { content: string }
 ) => {
   try {
     const { data } = await axiosInstance.put(
-      `/posts/update-comment/${postId}/${commentId}`,
-      newComment,
+      `/post/update-comment/${postId}/${commentId}`,
+      newComment
     );
 
     if (data?.success) {
@@ -69,7 +68,7 @@ export const editComment = async (
 export const deleteComment = async (postId: string, commentId: string) => {
   try {
     const { data } = await axiosInstance.delete(
-      `/posts/delete-comment/${postId}/${commentId}`,
+      `/post/delete-comment/${postId}/${commentId}`
     );
 
     if (data?.success) {
