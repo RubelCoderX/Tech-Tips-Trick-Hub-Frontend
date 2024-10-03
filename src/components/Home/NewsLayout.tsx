@@ -24,7 +24,7 @@ export default function NewsLayout() {
               />
             </div>
             <div className="p-4 space-y-2 ">
-              <span className="bg-green-500 text-white text-xs font-semibold px-2 py-1 rounded-full uppercase">
+              <span className="bg-pink-500 text-white text-xs font-semibold px-2 py-1 rounded-full uppercase">
                 Smart Watch
               </span>
               <h2 className="text-xl md:text-2xl font-bold mb-2 cursor-pointer hover:underline transition duration-300 ease-in-out">
@@ -44,7 +44,7 @@ export default function NewsLayout() {
               </div>
             </div>
           </div>
-          <Divider />
+          <hr />
 
           {/* Second Article */}
           <div className="flex flex-col md:flex-row overflow-hidden">
@@ -58,7 +58,7 @@ export default function NewsLayout() {
               />
             </div>
             <div className="p-4 space-y-2">
-              <span className="bg-green-500 text-white text-xs font-semibold px-2 py-1 rounded-full uppercase">
+              <span className="bg-pink-500 text-white text-xs font-semibold px-2 py-1 rounded-full uppercase">
                 Smart Watch
               </span>
               <h2 className="text-xl md:text-2xl font-bold mb-2 cursor-pointer hover:underline transition duration-300 ease-in-out">
@@ -116,7 +116,7 @@ export default function NewsLayout() {
                       </span>
                     </div>
                   </div>
-                ),
+                )
               )}
             </div>
           </div>

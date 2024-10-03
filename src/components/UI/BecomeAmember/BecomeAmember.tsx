@@ -26,14 +26,14 @@ const BecomeAmember = () => {
       {/* Banner content */}
       <div className="flex items-center space-x-2 mx-auto">
         <span className="text-yellow-500">✨</span> {/* Yellow sparkle icon */}
-        <p className="text-sm text-gray-900 dark:text-black text-center">
+        <p className="text-sm text-pink-500 dark:text-black text-center">
           Get unlimited access to the best of Gadget Guru Hub for less than
           $20/month.{" "}
           <button
-            className="underline text-black font-semibold dark:text-black"
+            className="underline text-black font-semibold hover:text-pink-500 transition-colors dark:text-black"
             onClick={() => handleNavigation("/become-member")}
           >
-            Become a member
+            Become <span className="text-pink-500">a member</span>
           </button>
         </p>
       </div>

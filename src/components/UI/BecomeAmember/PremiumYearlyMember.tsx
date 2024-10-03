@@ -2,7 +2,6 @@ import { useUser } from "@/src/context/user.provider";
 
 const PremiumYearlyMember = () => {
   const { user } = useUser();
-
   const defaultProfileImage = "https://i.ibb.co/hBpV37F/avater.png";
 
   return (
@@ -10,7 +9,7 @@ const PremiumYearlyMember = () => {
       {/* Pricing cards */}
       <div className="grid md:grid-cols-2 bg-content1 bg-transparent gap-6">
         {/* Member Plan */}
-        <div className="border p-6 rounded-lg ">
+        <div className="border p-6 rounded-lg">
           <div className="text-center mb-6">
             <div className="mb-4 flex justify-center items-center mx-auto">
               <img
@@ -19,41 +18,39 @@ const PremiumYearlyMember = () => {
                 src={user?.profileImage || defaultProfileImage}
               />
             </div>
-            <h2 className="text-xl font-semibold">Member</h2>
+            <h2 className="text-xl font-semibold text-pink-500">Member</h2>
             <p className="text-lg text-gray-600">
-              {" "}
               <del>$80</del> $60 USD/Year
             </p>
             <p className="mt-2 text-gray-500">
               Access member-only stories and enjoy an enhanced reading and
               writing experience. Cancel anytime.
             </p>
-            <button className="mt-4 bg-blue-500 text-white px-6 py-2 rounded-full">
+            <button className="mt-4 bg-transparent text-pink-500 border border-pink-500 px-6 py-2 rounded-full">
               Select
             </button>
           </div>
 
           <ul className="space-y-2">
-            <li className="flex items-center text-blue-600">
+            <li className="flex items-center text-pink-500">
               ✓ Read member-only stories
             </li>
-            <li className="flex items-center text-blue-600">
+            <li className="flex items-center text-pink-500">
               ✓ Support writers you read most
             </li>
-            <li className="flex items-center text-blue-600">
+            <li className="flex items-center text-pink-500">
               ✓ Earn money for your writing
             </li>
-            <li className="flex items-center text-blue-600">
+            <li className="flex items-center text-pink-500">
               ✓ Listen to audio narrations
             </li>
-
-            <li className="flex items-center text-blue-600">
+            <li className="flex items-center text-pink-500">
               ✓ Access our Mastodon community
             </li>
-            <li className="flex items-center text-blue-600">
+            <li className="flex items-center text-pink-500">
               ✓ Connect your custom domain
             </li>
-            <li className="flex items-center text-blue-600">
+            <li className="flex items-center text-pink-500">
               ✓ Create your own publications
             </li>
           </ul>
@@ -69,32 +66,31 @@ const PremiumYearlyMember = () => {
                 src={user?.profileImage || defaultProfileImage}
               />
             </div>
-            <h2 className="text-xl font-semibold">Friend</h2>
+            <h2 className="text-xl font-semibold text-pink-500">Friend</h2>
             <p className="text-lg text-gray-600">
-              {" "}
               <del>$120</del> $100 USD/Year
             </p>
             <p className="mt-2 text-gray-500">
               Contribute more to writers and strengthen your support for the
               Medium community. Cancel anytime.
             </p>
-            <button className="mt-4 bg-blue-500 text-white px-6 py-2 rounded-full">
+            <button className="mt-4 bg-transparent text-pink-500 border border-pink-500 px-6 py-2 rounded-full">
               Select
             </button>
           </div>
 
           <ul className="space-y-2">
-            <li className="flex items-center text-blue-600">
+            <li className="flex items-center text-pink-500">
               ✓ All Medium member benefits
             </li>
-            <li className="flex items-center text-blue-600">
+            <li className="flex items-center text-pink-500">
               ✓ <strong>Give 4x more to the writers you read</strong>
             </li>
-            <li className="flex items-center text-blue-600">
+            <li className="flex items-center text-pink-500">
               ✓ Share member-only stories with anyone and drive more earnings
               for writers
             </li>
-            <li className="flex items-center text-blue-600">
+            <li className="flex items-center text-pink-500">
               ✓ Customize app icon
             </li>
           </ul>

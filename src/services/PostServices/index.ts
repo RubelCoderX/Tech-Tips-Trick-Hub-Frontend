@@ -28,12 +28,12 @@ export const getPostById = async (postId: string) => {
 
 export const createComment = async (
   postId: string,
-  commentData: { user: string; content: string }
+  commentData: { user: string; content: string },
 ) => {
   try {
     const { data } = await axiosInstance.post(
       `/post/post-comment/${postId}`,
-      commentData
+      commentData,
     );
 
     revalidateTag("post");
@@ -47,12 +47,12 @@ export const createComment = async (
 export const editComment = async (
   postId: string,
   commentId: string,
-  newComment: { content: string }
+  newComment: { content: string },
 ) => {
   try {
     const { data } = await axiosInstance.put(
       `/post/update-comment/${postId}/${commentId}`,
-      newComment
+      newComment,
     );
 
     if (data?.success) {
@@ -68,7 +68,7 @@ export const editComment = async (
 export const deleteComment = async (postId: string, commentId: string) => {
   try {
     const { data } = await axiosInstance.delete(
-      `/post/delete-comment/${postId}/${commentId}`
+      `/post/delete-comment/${postId}/${commentId}`,
     );
 
     if (data?.success) {

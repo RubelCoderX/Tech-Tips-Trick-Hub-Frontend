@@ -20,7 +20,7 @@ export default function page() {
                 className="text-2xl text-black font-semibold dark:text-black font-serif"
                 href="/"
               >
-                Gadget Guru Hub
+                Gadget <span className="text-pink-500">Guru Hub</span>
               </Link>
             </p>
           </div>
@@ -28,7 +28,8 @@ export default function page() {
       </div>
       <div className="text-center max-w-2xl mx-auto mb-8">
         <h1 className="text-3xl font-semibold font-serif">
-          Support great writing and access all stories on Gadget Guru Hub.
+          Support great writing and access all stories on{" "}
+          <span className="text-pink-500">Gadget Guru Hub</span>.
         </h1>
       </div>
 

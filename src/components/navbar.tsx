@@ -36,18 +36,23 @@ export const Navbar = () => {
     >
       <NavbarContent className="basis-1/5 sm:basis-full" justify="start">
         <NavbarBrand as="li" className="gap-3 max-w-fit">
-          <NextLink className="flex justify-start items-center gap-1" href="/">
+          <NextLink
+            className="flex justify-start items-center gap-1 light light:text-[#F9F9F9]"
+            href="/"
+          >
             <Logo />
-            <p className="font-bold text-inherit">ACME</p>
+            <p className="font-bold text-inherit uppercase ">
+              Gadget <span className="text-pink-500">Guru Hub</span>
+            </p>
           </NextLink>
         </NavbarBrand>
-        <ul className="hidden lg:flex gap-4  justify-start ml-2">
+        <ul className="hidden lg:flex gap-4  justify-start ml-2 uppercase font-bold ">
           {siteConfig.navItems.map((item) => (
             <NavbarItem key={item.href}>
               <NextLink
                 className={clsx(
                   linkStyles({ color: "foreground" }),
-                  "data-[active=true]:text-primary data-[active=true]:font-medium",
+                  "data-[active=true]:text-primary data-[active=true]:font-medium hover:text-pink-500 transition-colors"
                 )}
                 color="foreground"
                 href={item.href}

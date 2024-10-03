@@ -1,4 +1,9 @@
 "use client";
+
+import React, { useState } from "react";
+import Image from "next/image";
+import moment from "moment";
+import { FieldValues, SubmitHandler } from "react-hook-form";
 import {
   CalendarDays,
   BarChart2,
@@ -6,20 +11,19 @@ import {
   MoreVertical,
   ThumbsDown,
   ThumbsUp,
-  MessageSquare,
+  UserPlus,
 } from "lucide-react";
-import Link from "next/link";
-import { Divider } from "@nextui-org/divider";
-import Image from "next/image";
-import { useState } from "react";
-import moment from "moment";
-import { Card, CardBody, CardFooter, CardHeader } from "@nextui-org/card";
-import { Avatar } from "@nextui-org/avatar";
-import React from "react";
-import { Button } from "@nextui-org/button";
+import {
+  Card,
+  CardHeader,
+  CardBody,
+  Avatar,
+  Button,
+  Divider,
+} from "@nextui-org/react";
 
-import { TechTextArea } from "../../form/TechTextAera";
 import TechForm from "../../form/TechForm";
+import { TechTextArea } from "../../form/TechTextAera";
 
 import { useUser } from "@/src/context/user.provider";
 import {
@@ -28,293 +32,247 @@ import {
   usePostComment,
 } from "@/src/hooks/post.hooks";
 import { TPost } from "@/src/types";
-import { FieldValues, SubmitHandler } from "react-hook-form";
 
 const PostData = ({ post }: { post: TPost }) => {
   const { user } = useUser();
-
   const { mutate: handlePostComment, isPending, isSuccess } = usePostComment();
   const { mutate: handleEditComment } = useEditComment();
   const { mutate: handleDeleteComment } = useDeleteComment();
   const [editingCommentId, setEditingCommentId] = useState<string | null>(null);
   const [content, setContent] = useState<string>("");
 
-  // Handler for form submission
-
   const handleSubmitComment: SubmitHandler<FieldValues> = (data) => {
-    const commentData = {
-      user: user?._id,
-      ...data,
-    };
-
     const commentInfo = {
       postId: post._id,
-      comment: commentData,
+      comment: {
+        user: user?._id,
+        ...data,
+      },
     };
 
     handlePostComment(commentInfo);
   };
-  // Handler for editing comment
+
   const handleEditComments = (commentId: string, currentContent: string) => {
     setEditingCommentId(commentId);
     setContent(currentContent);
   };
-  // Handler for deleting comment
+
   const handleDeleteComments = (commentId: string) => {
     handleDeleteComment({ postId: post?._id, commentId });
   };
+
   const handleCancel = () => {
     setEditingCommentId(null);
   };
 
-  // handle for save action
   const handleSaveClick = (commentId: string) => {
     handleEditComment({ postId: post?._id, commentId, comment: { content } });
     setEditingCommentId(null);
   };
-  // Handler for like button
-  const handleLike = () => {
-    // setLikeCount(likeCount + 1);
-  };
-
-  // Handler for dislike button
-  const handleDislike = () => {
-    // setDislikeCount(dislikeCount + 1);
+  const handleFollow = () => {
+    // Implement follow functionality here
+    console.log("Followed!");
   };
 
   return (
-    <div className="max-w-5xl mt-10 mx-auto px-4 sm:px-6 lg:px-8">
-      <div className="p-4  mb-10 sm:p-6 md:p-16">
-        <div className="flex items-center justify-between mb-4">
-          <div className="flex items-center space-x-3">
-            <Image
-              alt={post?.author?.name}
-              className="rounded-full border"
-              height={60}
-              src={post?.author?.profileImage || ""}
-              width={60}
-            />
-            <div>
-              <p className="font-semibold">{post?.author?.name}</p>
-              <div className="flex items-center text-sm text-gray-400">
-                <CalendarDays className="w-4 h-4 mr-1" />
-                <time dateTime={post?.createdAt}>
-                  {moment(post?.createdAt).format("MMM DD, YYYY")}
-                </time>
+    <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <Card className="overflow-hidden p-4 ">
+        <CardHeader>
+          <div className="flex items-center justify-between space-x-4">
+            <div className="flex items-center space-x-4">
+              <Avatar
+                alt={post?.author?.name}
+                src={post?.author?.profileImage}
+              />
+              <div>
+                <h3 className="text-lg font-semibold">{post?.author?.name}</h3>
+                <div className="flex items-center text-sm text-muted-foreground">
+                  <CalendarDays className="w-4 h-4 mr-1" />
+                  <time dateTime={post?.createdAt}>
+                    {moment(post?.createdAt).format("MMM DD, YYYY")}
+                  </time>
+                </div>
               </div>
             </div>
+            <div>
+              <Button
+                variant="bordered"
+                size="sm"
+                onClick={handleFollow}
+                // radius="none"
+                className="bg-blue-700 text-white"
+              >
+                <UserPlus className="w-4 h-4 mr-2" />
+                Follow
+              </Button>
+            </div>
           </div>
-          <MoreVertical className="w-5 h-5 text-gray-400" />
-        </div>
-
-        <h1 className="text-2xl sm:text-3xl font-bold mb-4">
-          French Alps: A snowboarding wonderland
-        </h1>
-
-        <p className="text-gray-400 mb-4">
-          Create a blog post subtitle that summarizes your post in a few short,
-          punchy sentences and entices your audience to continue reading.
-        </p>
-
-        <div className="mb-6">
-          <Image
-            alt="Snowy mountain landscape"
-            className="w-full h-auto"
-            height={400}
-            src={post?.images[0]}
-            width={800}
-          />
-        </div>
-
-        <p className="mb-6">{post?.description}</p>
-
-        <h2 className="text-xl font-semibold mb-3">Design with Ease</h2>
-
-        <blockquote className="border-l-4 border-gray-500 pl-4 mb-4 italic">
-          &quot;Do you have a design in mind for your blog? Whether you prefer a
-          trendy postcard look or youre going for a more editorial style blog -
-          theres a stunning layout for everyone.&quot;
-        </blockquote>
-
-        <p className="mb-6">
-          Every layout comes with the latest social features built in. Readers
-          will be able to easily share posts on social networks like Facebook
-          and Twitter, view how many people have liked a post, made comments and
-          more. With the Wix, building your online community has never been
-          easier.
-        </p>
-
-        <h2 className="text-xl font-semibold mb-3">Create Relevant Content</h2>
-
-        <p className="mb-6">
-          You&apos;ll be posting loads of engaging content, so be sure to keep
-          your blog organized with Categories that also allow readers to explore
-          more of what interests them. Each category of your blog has its own
-          page page thats fully customizable. Add a catchy title, a brief
-          description and a beautiful image to the category page header to truly
-          make it your own. You can also add tags (#vacation #dream #summer)
-          throughout your posts to reach more people, and help readers search
-          for relevant content. Using hashtags can expand your post reach and
-          help people find the content that matters to them. Go ahead, #hashtag
-          away.
-        </p>
-
-        <Divider className="my-4" />
-        <div className="flex items-center justify-between text-gray-400 flex-wrap">
-          <div className="flex space-x-4 items-center">
-            <Link
-              className="flex items-center space-x-1 hover:text-white"
-              href="#"
-            >
-              <EyeIcon className="h-5 w-5" />
-              <span>0 Views</span>
-            </Link>
-
-            <Link
-              className="flex items-center space-x-1 hover:text-white"
-              href="#"
-            >
-              <BarChart2 className="h-5 w-5" />
-              {/* <span>{comments.length} Comments</span> */}
-            </Link>
+        </CardHeader>
+        <CardBody>
+          <h1 className="text-3xl font-bold mb-2">{post?.title}</h1>
+          <p className="text-muted-foreground mb-3">{post?.category}</p>
+          <div className="relative mb-6">
+            <Image
+              alt="Snowy mountain landscape"
+              className="w-full h-auto"
+              height={400}
+              src={post?.images[0]}
+              width={400}
+            />
           </div>
-
-          <div className="flex items-center space-x-4 mt-2 md:mt-0 flex-wrap">
-            <button
-              className="flex justify-center items-center space-x-1 px-2 py-1 hover:border cursor-pointer"
-              onClick={handleLike}
-            >
-              <ThumbsUp className="h-5 w-5 text-blue-500" />
-              <span className="hidden sm:block">Like</span>
-              <span className="font-medium text-gray-700 text-xl">
-                {/* {likeCount} */}
-              </span>
-            </button>
-
-            <div
-              className="flex justify-center items-center space-x-1 px-2 py-1 cursor-pointer"
-              //   onClick={handleDislike}
-            >
-              <ThumbsDown className="h-5 w-5 text-red-500" />
-              <span>Dislike</span>
-              <span className="text-sm font-medium text-gray-700">
-                {/* {dislikeCount} */}
-              </span>
+          <div className="prose max-w-none">
+            <p className="mb-6">{post?.description}</p>
+            <h2 className="text-xl font-semibold mb-3">Design with Ease</h2>
+            <blockquote className="border-l-4 border-gray-500 pl-4 mb-4 italic">
+              &quot;Do you have a design in mind for your blog? Whether you
+              prefer a trendy postcard look or youre going for a more editorial
+              style blog - theres a stunning layout for everyone.&quot;
+            </blockquote>
+            <p className="mb-6">
+              Every layout comes with the latest social features built in.
+              Readers will be able to easily share posts on social networks like
+              Facebook and Twitter, view how many people have liked a post, made
+              comments and more. With Wix, building your online community has
+              never been easier.
+            </p>
+            <h2 className="text-xl font-semibold mb-3">
+              Create Relevant Content
+            </h2>
+            <p className="mb-6">
+              You'll be posting loads of engaging content, so be sure to keep
+              your blog organized with Categories that also allow readers to
+              explore more of what interests them. Each category of your blog
+              has its own page that's fully customizable. Add a catchy title, a
+              brief description and a beautiful image to the category page
+              header to truly make it your own. You can also add tags (#vacation
+              #dream #summer) throughout your posts to reach more people, and
+              help readers search for relevant content. Using hashtags can
+              expand your post reach and help people find the content that
+              matters to them. Go ahead, #hashtag away.
+            </p>
+          </div>
+        </CardBody>
+        <div className="p-6 bg-muted/50">
+          <div className="flex flex-wrap items-center justify-between w-full gap-4">
+            <div className="flex space-x-4 items-center">
+              <Button size="sm" variant="ghost">
+                <EyeIcon className="w-4 h-4 mr-2" />0 Views
+              </Button>
+              <Button size="sm" variant="ghost">
+                <BarChart2 className="w-4 h-4 mr-2" />
+                {post?.comments?.length || 0} Comments
+              </Button>
+            </div>
+            <div className="flex items-center space-x-2">
+              <Button size="sm" variant="bordered">
+                <ThumbsUp className="w-4 h-4 mr-2" />
+                Like
+              </Button>
+              <Button size="sm" variant="bordered">
+                <ThumbsDown className="w-4 h-4 mr-2" />
+                Dislike
+              </Button>
             </div>
           </div>
         </div>
-      </div>
-      {/* Comments Section */}
-      <Card className="mt-8 container">
+      </Card>
+
+      <Card className="mt-8 p-4 ">
         <CardHeader>
-          <h2 className="text-2xl font-sans">Comments</h2>
+          <h2 className="text-2xl font-semibold">Comments</h2>
         </CardHeader>
-        <Divider />
         <CardBody>
           {post?.comments.map((comment) => (
-            <div
-              key={comment._id}
-              className="mb-4 pb-4 border-b last:border-b-0"
-            >
-              <div className="flex items-center space-x-2 mb-2">
+            <div key={comment._id} className="mb-6 last:mb-0">
+              <div className="flex items-start space-x-4">
                 <Avatar
-                  fallback
-                  alt={comment?.user?.name}
-                  src={comment?.user?.profileImage}
+                  alt={post?.author?.name}
+                  src={post?.author?.profileImage}
                 />
-
-                <div>
-                  <p className="text-sm font-medium">{comment?.user?.name}</p>
-                  <p className="text-xs text-muted-foreground">
-                    {moment(comment.createdAt).format("MMM DD, YYYY")}
-                  </p>
-                </div>
-              </div>
-              <Divider />
-              {editingCommentId === comment._id ? (
-                <textarea
-                  className="w-full border border-gray-300 p-2"
-                  value={content}
-                  onChange={(e) => setContent(e.target.value)}
-                />
-              ) : (
-                <p>{comment?.content}</p>
-              )}
-              <Divider />
-              {user?._id === comment?.user?._id && (
-                <div className="flex items-center text-sm space-x-2 mt-3">
+                <div className="flex-1">
+                  <div className="flex items-center justify-between">
+                    <h4 className="text-sm font-semibold">
+                      {comment?.user?.name}
+                    </h4>
+                    <time className="text-xs text-muted-foreground">
+                      {moment(comment.createdAt).format("MMM DD, YYYY")}
+                    </time>
+                  </div>
                   {editingCommentId === comment._id ? (
-                    <>
-                      <Button
-                        radius="none"
-                        variant="bordered"
-                        onClick={() => handleSaveClick(comment._id)}
-                      >
-                        Save
-                      </Button>
-                      <Button
-                        radius="none"
-                        variant="bordered"
-                        onClick={handleCancel}
-                      >
-                        Cancel
-                      </Button>
-                    </>
+                    <textarea
+                      className="mt-2"
+                      value={content}
+                      onChange={(e) => setContent(e.target.value)}
+                    />
                   ) : (
-                    <>
-                      <Button
-                        radius="none"
-                        variant="bordered"
-                        onClick={() =>
-                          handleEditComments(comment?._id, comment.content)
-                        }
-                      >
-                        Edit
-                      </Button>
-                      <Button
-                        radius="none"
-                        variant="bordered"
-                        onClick={() => handleDeleteComments(comment?._id)}
-                      >
-                        Delete
-                      </Button>
-                    </>
+                    <p className="mt-1 text-sm">{comment?.content}</p>
+                  )}
+                  {user?._id === comment?.user?._id && (
+                    <div className="flex items-center space-x-2 mt-2">
+                      {editingCommentId === comment._id ? (
+                        <>
+                          <Button
+                            size="sm"
+                            onClick={() => handleSaveClick(comment._id)}
+                          >
+                            Save
+                          </Button>
+                          <Button
+                            size="sm"
+                            variant="bordered"
+                            onClick={handleCancel}
+                          >
+                            Cancel
+                          </Button>
+                        </>
+                      ) : (
+                        <>
+                          <Button
+                            size="sm"
+                            variant="bordered"
+                            radius="none"
+                            onClick={() =>
+                              handleEditComments(comment._id, comment?.content)
+                            }
+                          >
+                            Edit
+                          </Button>
+                          <Button
+                            size="sm"
+                            variant="bordered"
+                            radius="none"
+                            onClick={() => handleDeleteComments(comment._id)}
+                          >
+                            Delete
+                          </Button>
+                        </>
+                      )}
+                    </div>
                   )}
                 </div>
-              )}
+              </div>
+              <Divider className="my-4" />
             </div>
           ))}
-        </CardBody>
-        <Divider />
-        <CardFooter className="w-full">
           <TechForm onSubmit={handleSubmitComment}>
             <TechTextArea
-              label="Write comments.."
+              label="write a comment"
               name="content"
-              radius="none"
               variant="bordered"
+              radius="none"
             />
             <Button
-              className="mt-3"
-              isDisabled={isPending && !isSuccess}
-              radius="none"
+              className="mt-4"
+              size="sm"
               type="submit"
               variant="bordered"
+              radius="none"
             >
-              {isPending ? (
-                <>
-                  <MessageSquare className="mr-2 h-5 w-5 animate-spin" />
-                  Posting...
-                </>
-              ) : (
-                <>
-                  <MessageSquare className="mr-2 h-5 w-5" />
-                  Post Comment
-                </>
-              )}
+              {isPending && isSuccess ? "Posting..." : "Post Comment"}
             </Button>
           </TechForm>
-        </CardFooter>
+        </CardBody>
       </Card>
     </div>
   );

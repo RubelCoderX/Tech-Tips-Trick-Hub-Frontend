@@ -35,7 +35,7 @@ const HeroSection = () => {
                 {filteredPosts[0]?.category || "Category"}
               </span>
               <Link
-                className="text-white block text-2xl md:text-3xl font-bold mb-2 cursor-pointer hover:underline transition duration-300 ease-in-out"
+                className="text-white hover:text-pink-500 transition-colors block text-2xl md:text-3xl font-bold mb-2 cursor-pointer hover:underline transition duration-300 ease-in-out"
                 href={`/${filteredPosts[0]?._id}`}
               >
                 {filteredPosts[0]?.title || "Main Article Title"}
@@ -73,7 +73,7 @@ const HeroSection = () => {
                   {article.category || "Category"}
                 </span>
                 <Link
-                  className="text-white text-lg block font-bold mb-1 cursor-pointer hover:underline"
+                  className="text-white hover:text-pink-500 transition-colors text-lg block font-bold mb-1 cursor-pointer hover:underline"
                   href={`/${article._id}`}
                 >
                   {article.title || "Article Title"}
