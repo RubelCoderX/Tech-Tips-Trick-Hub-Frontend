@@ -80,3 +80,31 @@ export const deleteComment = async (postId: string, commentId: string) => {
     throw new Error(error);
   }
 };
+export const votePost = async (postId: string, action: string) => {
+  try {
+    const { data } = await axiosInstance.put(`/post/${postId}/vote`, {
+      action,
+    });
+
+    if (data?.success) {
+      revalidateTag("post");
+
+      return null;
+    }
+  } catch (error: any) {
+    throw new Error(error);
+  }
+};
+export const getMyPosts = async () => {
+  try {
+    const { data } = await axiosInstance.get("/post/my-posts");
+
+    if (data?.success) {
+      revalidateTag("post");
+
+      return;
+    }
+  } catch (error: any) {
+    throw new Error(error);
+  }
+};

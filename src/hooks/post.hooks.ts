@@ -7,6 +7,8 @@ import {
   deleteComment,
   editComment,
   getAllPosts,
+  getMyPosts,
+  votePost,
 } from "../services/PostServices";
 
 export const usePostComment = () => {
@@ -54,19 +56,25 @@ export const useEditComment = () => {
   });
 };
 
-// export const useVotePost = () => {
-//   return useMutation<any, Error, { postId: string; action: string }>({
-//     mutationKey: ["vote-post"],
-//     mutationFn: async ({ postId, action }) => await votePost(postId, action),
-//     onError: () => {
-//       toast.error("Failed to cast vote!");
-//     },
-//   });
-// };
-
 export const useGetAllPosts = () => {
   return useQuery({
     queryKey: ["all-posts"],
     queryFn: async () => await getAllPosts(),
+  });
+};
+
+export const useVotePost = () => {
+  return useMutation<any, Error, { postId: string; action: string }>({
+    mutationKey: ["vote-post"],
+    mutationFn: async ({ postId, action }) => await votePost(postId, action),
+    onError: () => {
+      toast.error("Failed to vote post!");
+    },
+  });
+};
+export const useGetMyPosts = () => {
+  return useQuery({
+    queryKey: ["my-posts"],
+    queryFn: async () => await getMyPosts(),
   });
 };

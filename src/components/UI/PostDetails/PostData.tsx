@@ -8,7 +8,6 @@ import {
   CalendarDays,
   BarChart2,
   EyeIcon,
-  MoreVertical,
   ThumbsDown,
   ThumbsUp,
   UserPlus,
@@ -30,6 +29,7 @@ import {
   useDeleteComment,
   useEditComment,
   usePostComment,
+  useVotePost,
 } from "@/src/hooks/post.hooks";
 import { TPost } from "@/src/types";
 
@@ -38,8 +38,11 @@ const PostData = ({ post }: { post: TPost }) => {
   const { mutate: handlePostComment, isPending, isSuccess } = usePostComment();
   const { mutate: handleEditComment } = useEditComment();
   const { mutate: handleDeleteComment } = useDeleteComment();
+  const { mutate: createVote } = useVotePost();
   const [editingCommentId, setEditingCommentId] = useState<string | null>(null);
   const [content, setContent] = useState<string>("");
+  const [isLiked, setIsLiked] = useState<boolean>(false);
+  const [isDisliked, setIsDisliked] = useState<boolean>(false);
 
   const handleSubmitComment: SubmitHandler<FieldValues> = (data) => {
     const commentInfo = {
@@ -74,6 +77,16 @@ const PostData = ({ post }: { post: TPost }) => {
     // Implement follow functionality here
     console.log("Followed!");
   };
+  const handleVotes = (postId: string, action: string) => {
+    if (action === "upvote") {
+      setIsLiked(true);
+      setIsDisliked(false);
+    } else if (action === "downvote") {
+      setIsDisliked(true);
+      setIsLiked(false);
+    }
+    createVote({ postId, action });
+  };
 
   return (
     <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
@@ -97,8 +110,8 @@ const PostData = ({ post }: { post: TPost }) => {
             </div>
             <div>
               <Button
-                variant="bordered"
                 size="sm"
+                variant="bordered"
                 onClick={handleFollow}
                 // radius="none"
                 className="bg-blue-700 text-white"
@@ -111,7 +124,7 @@ const PostData = ({ post }: { post: TPost }) => {
         </CardHeader>
         <CardBody>
           <h1 className="text-3xl font-bold mb-2">{post?.title}</h1>
-          <p className="text-muted-foreground mb-3">{post?.category}</p>
+          <p className="text-muted-foreground mb-3 ">{post?.category}</p>
           <div className="relative mb-6">
             <Image
               alt="Snowy mountain landscape"
@@ -165,12 +178,22 @@ const PostData = ({ post }: { post: TPost }) => {
               </Button>
             </div>
             <div className="flex items-center space-x-2">
-              <Button size="sm" variant="bordered">
-                <ThumbsUp className="w-4 h-4 mr-2" />
+              <Button
+                className={isLiked ? "text-blue-500 border-blue-500" : ""}
+                size="sm"
+                variant="bordered"
+                onClick={() => handleVotes(post?._id, "upvote")}
+              >
+                <ThumbsUp className={"w-4 h-4 mr-2 "} />
                 Like
               </Button>
-              <Button size="sm" variant="bordered">
-                <ThumbsDown className="w-4 h-4 mr-2" />
+              <Button
+                className={isDisliked ? "text-red-500 border-red-500" : ""}
+                size="sm"
+                variant="bordered"
+                onClick={() => handleVotes(post?._id, "downvote")}
+              >
+                <ThumbsDown className={"w-4 h-4 mr-2"} />
                 Dislike
               </Button>
             </div>
@@ -187,8 +210,8 @@ const PostData = ({ post }: { post: TPost }) => {
             <div key={comment._id} className="mb-6 last:mb-0">
               <div className="flex items-start space-x-4">
                 <Avatar
-                  alt={post?.author?.name}
-                  src={post?.author?.profileImage}
+                  alt={comment?.user?.profileImage}
+                  src={comment?.user?.profileImage}
                 />
                 <div className="flex-1">
                   <div className="flex items-center justify-between">
@@ -229,9 +252,9 @@ const PostData = ({ post }: { post: TPost }) => {
                       ) : (
                         <>
                           <Button
+                            radius="none"
                             size="sm"
                             variant="bordered"
-                            radius="none"
                             onClick={() =>
                               handleEditComments(comment._id, comment?.content)
                             }
@@ -239,9 +262,9 @@ const PostData = ({ post }: { post: TPost }) => {
                             Edit
                           </Button>
                           <Button
+                            radius="none"
                             size="sm"
                             variant="bordered"
-                            radius="none"
                             onClick={() => handleDeleteComments(comment._id)}
                           >
                             Delete
@@ -259,15 +282,15 @@ const PostData = ({ post }: { post: TPost }) => {
             <TechTextArea
               label="write a comment"
               name="content"
-              variant="bordered"
               radius="none"
+              variant="bordered"
             />
             <Button
               className="mt-4"
+              radius="none"
               size="sm"
               type="submit"
               variant="bordered"
-              radius="none"
             >
               {isPending && isSuccess ? "Posting..." : "Post Comment"}
             </Button>

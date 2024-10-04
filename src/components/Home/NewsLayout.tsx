@@ -1,83 +1,54 @@
+"use client"; // Ensure to keep this at the top
 import Image from "next/image";
-import { CalendarIcon, ShareIcon } from "lucide-react";
-import { Divider } from "@nextui-org/divider";
+import { CalendarIcon } from "lucide-react";
 import { FaRegComment } from "react-icons/fa";
 
 import bannerImage from "../../assets/watch.jpg";
 import satelliteImage from "../../assets/satelight.jpg";
 
-export default function NewsLayout() {
+export default function NewsLayout({ posts }) {
   return (
     <div className="container mx-auto px-4 py-8 mt-16">
       <h1 className="text-3xl sm:text-4xl font-bold mb-8">What's New</h1>
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      <div className="grid grid-cols-1  lg:grid-cols-3 gap-8">
         <div className="lg:col-span-2 space-y-8">
-          {/* Featured Article */}
-          <div className="flex flex-col md:flex-row overflow-hidden">
-            <div>
-              <Image
-                alt="Smart Watch"
-                className="w-full md:w-[430px] h-40 object-cover"
-                height={300}
-                src={bannerImage}
-                width={600}
-              />
-            </div>
-            <div className="p-4 space-y-2 ">
-              <span className="bg-pink-500 text-white text-xs font-semibold px-2 py-1 rounded-full uppercase">
-                Smart Watch
-              </span>
-              <h2 className="text-xl md:text-2xl font-bold mb-2 cursor-pointer hover:underline transition duration-300 ease-in-out">
-                These 5 Simple TECHNOLOGY Tricks Will Pump Up Your Sales Almost
-                Instantly
-              </h2>
-              <div className="flex items-center text-sm">
-                <span>By axilthemes</span>
-                <span className="mx-2">•</span>
-                <CalendarIcon className="w-4 h-4 mr-1" />
-                <span>November 6, 2019</span>
-                <span className="mx-2">•</span>
-                <FaRegComment className="w-4 h-4 mr-1 cursor-pointer" />
-                <span>4,093 Comments</span>
-                <span className="mx-2">•</span>
-                <span>Shares</span>
+          {posts.slice(6).map((post) => (
+            <div
+              key={post._id}
+              className="flex flex-col md:flex-row overflow-hidden border-b border-gray-300 pb-4 last:border-b-0"
+            >
+              <div className="">
+                <Image
+                  alt={post.title || "Post Image"}
+                  className=" w-[400px] h-40 object-cover"
+                  height={300}
+                  src={post.images[0] || bannerImage}
+                  width={400}
+                />
+              </div>
+              <div className="p-4 space-y-2">
+                <span className="bg-pink-500 text-white text-xs font-semibold px-2 py-1 uppercase">
+                  {post.category || "Category"}
+                </span>
+                <h2 className="text-xl md:text-2xl font-bold mb-2 cursor-pointer hover:underline transition duration-300 ease-in-out">
+                  {post.title || "Post Title"}
+                </h2>
+                <div className="flex items-center text-sm">
+                  <span>By {post.author?.name || "Author"}</span>
+                  <span className="mx-2">•</span>
+                  <CalendarIcon className="w-4 h-4 mr-1" />
+                  <span>
+                    {new Date(post.createdAt).toLocaleDateString() || "Date"}
+                  </span>
+                  <span className="mx-2">•</span>
+                  <FaRegComment className="w-4 h-4 mr-1 cursor-pointer" />
+                  <span>{post.comments || 0} Comments</span>
+                  <span className="mx-2">•</span>
+                  <span>{post.shares || 0} Shares</span>
+                </div>
               </div>
             </div>
-          </div>
-          <hr />
-
-          {/* Second Article */}
-          <div className="flex flex-col md:flex-row overflow-hidden">
-            <div>
-              <Image
-                alt="Smart Watch"
-                className="w-full md:w-[430px] h-40 object-cover"
-                height={300}
-                src={satelliteImage}
-                width={600}
-              />
-            </div>
-            <div className="p-4 space-y-2">
-              <span className="bg-pink-500 text-white text-xs font-semibold px-2 py-1 rounded-full uppercase">
-                Smart Watch
-              </span>
-              <h2 className="text-xl md:text-2xl font-bold mb-2 cursor-pointer hover:underline transition duration-300 ease-in-out">
-                These 5 Simple TECHNOLOGY Tricks Will Pump Up Your Sales Almost
-                Instantly
-              </h2>
-              <div className="flex items-center text-sm">
-                <span>By axilthemes</span>
-                <span className="mx-2">•</span>
-                <CalendarIcon className="w-4 h-4 mr-1" />
-                <span>November 6, 2019</span>
-                <span className="mx-2">•</span>
-                <ShareIcon className="w-4 h-4 mr-1" />
-                <span>4,093 Views</span>
-                <span className="mx-2">•</span>
-                <span>Shares</span>
-              </div>
-            </div>
-          </div>
+          ))}
         </div>
 
         <div className="space-y-8">
