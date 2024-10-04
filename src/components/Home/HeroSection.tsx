@@ -3,25 +3,29 @@ import Image from "next/image";
 import React from "react";
 import { CalendarIcon, ShareIcon } from "lucide-react";
 import Link from "next/link";
+import { FaRegComment } from "react-icons/fa";
 
 import bannerImage from "../../assets/watch.jpg";
 import satelliteImage from "../../assets/satelight.jpg";
-import { TPost } from "@/src/types";
 
-const HeroSection = ({ posts }: { post: TPost }) => {
+import { PostProps } from "@/src/types";
+
+const HeroSection = ({ posts }: PostProps) => {
   return (
     <div className="">
       <div className="grid grid-cols-1 md:grid-cols-2  lg:grid-cols-3">
         {/* Main featured article */}
         {posts.length > 0 && (
           <div className="md:col-span-2 lg:col-span-2 relative border-r dark:border-r-slate-200">
-            <Image
-              alt={posts[0]?.title || "Main Article"}
-              className="object-cover w-full h-[700px]"
-              height={900}
-              src={posts[0]?.images[0] || bannerImage}
-              width={800}
-            />
+            <div className=" overflow-hidden relative">
+              <Image
+                alt={posts[0]?.title || "Main Article"}
+                className="object-cover w-full h-[700px] cursor-pointer transition-transform duration-300 hover:scale-110"
+                height={900}
+                src={posts[0]?.images[0] || bannerImage}
+                width={800}
+              />
+            </div>
             <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-6">
               <span className="inline-block bg-pink-500 text-white px-3 py-1 text-sm font-semibold  mb-2">
                 {posts[0]?.category || "Category"}
@@ -42,6 +46,14 @@ const HeroSection = ({ posts }: { post: TPost }) => {
                 <span className="mx-2">•</span>
                 <ShareIcon className="w-4 h-4 mr-1" />
                 <span>{posts[0]?.views || "Views"} Views</span>
+                <span className="mx-2">•</span>
+                <Link
+                  className="flex items-center justify-center hover:text-pink-500 transition-colors"
+                  href={`/${posts[0]?._id}#comment`}
+                >
+                  <FaRegComment className="w-4 h-4 mr-1 cursor-pointer" />
+                  <span>{posts[0]?.comments?.length || "No"} Comments</span>
+                </Link>
               </div>
             </div>
           </div>
@@ -54,13 +66,15 @@ const HeroSection = ({ posts }: { post: TPost }) => {
               key={article._id}
               className="relative border-b last:border-b-0"
             >
-              <Image
-                alt={article.title || "Article Image"}
-                className="object-cover w-full h-[350px]"
-                height={300}
-                src={article.images[0] || satelliteImage}
-                width={400}
-              />
+              <div className=" overflow-hidden relative">
+                <Image
+                  alt={article.title || "Article Image"}
+                  className="object-cover cursor-pointer w-full h-[350px] transition-transform duration-300 hover:scale-110"
+                  height={300}
+                  src={article.images[0] || satelliteImage}
+                  width={400}
+                />
+              </div>
 
               <div className="absolute  bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-4">
                 <span className="inline-block bg-pink-500 text-white px-3 py-1 text-sm font-semibold  mb-2">
@@ -72,9 +86,27 @@ const HeroSection = ({ posts }: { post: TPost }) => {
                 >
                   {article.title || "Article Title"}
                 </Link>
-                <p className="text-white text-sm">
-                  By {article.author?.name || "Author"}{" "}
-                </p>
+
+                <div className="flex items-center text-white text-sm">
+                  <span>By {article?.author?.name || "Author"}</span>
+                  <span className="mx-2">•</span>
+                  <CalendarIcon className="w-4 h-4 mr-1" />
+                  <span>
+                    {new Date(article?.createdAt).toLocaleDateString() ||
+                      "Date"}
+                  </span>
+                  <span className="mx-2">•</span>
+                  <ShareIcon className="w-4 h-4 mr-1" />
+                  <span>{article?.views || "Views"} Views</span>
+                  <span className="mx-2">•</span>
+                  <Link
+                    className="flex items-center justify-center hover:text-pink-500 transition-colors"
+                    href={`/${article?._id}#comment`}
+                  >
+                    <FaRegComment className="w-4 h-4 mr-1 cursor-pointer" />
+                    <span>{article?.comments?.length || "No"} Comments</span>
+                  </Link>
+                </div>
               </div>
             </div>
           ))}

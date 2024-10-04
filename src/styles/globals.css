@@ -1,6 +1,8 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-.bg-content1 {
-  background-color: transparent !important; /* Or set to any color you prefer */
+
+html,
+body {
+  scroll-behavior: smooth;
 }

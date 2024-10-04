@@ -201,7 +201,7 @@ const PostData = ({ post }: { post: TPost }) => {
         </div>
       </Card>
 
-      <Card className="mt-8 p-4 ">
+      <Card className="mt-8 p-4 " id="comment">
         <CardHeader>
           <h2 className="text-2xl font-semibold">Comments</h2>
         </CardHeader>

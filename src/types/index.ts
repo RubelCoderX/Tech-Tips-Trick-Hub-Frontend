@@ -62,6 +62,9 @@ export interface TPost {
   updatedAt: string;
   __v: number;
 }
+export interface PostProps {
+  posts: TPost[];
+}
 
 export interface TAuthor {
   _id: string;
