@@ -43,9 +43,7 @@ const HeroSection = ({ posts }: PostProps) => {
                 <span>
                   {new Date(posts[0]?.createdAt).toLocaleDateString() || "Date"}
                 </span>
-                <span className="mx-2">•</span>
-                <ShareIcon className="w-4 h-4 mr-1" />
-                <span>{posts[0]?.views || "Views"} Views</span>
+
                 <span className="mx-2">•</span>
                 <Link
                   className="flex items-center justify-center hover:text-pink-500 transition-colors"
@@ -95,9 +93,7 @@ const HeroSection = ({ posts }: PostProps) => {
                     {new Date(article?.createdAt).toLocaleDateString() ||
                       "Date"}
                   </span>
-                  <span className="mx-2">•</span>
-                  <ShareIcon className="w-4 h-4 mr-1" />
-                  <span>{article?.views || "Views"} Views</span>
+
                   <span className="mx-2">•</span>
                   <Link
                     className="flex items-center justify-center hover:text-pink-500 transition-colors"

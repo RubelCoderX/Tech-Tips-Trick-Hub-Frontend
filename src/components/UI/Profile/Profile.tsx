@@ -15,13 +15,13 @@ export default function Profile() {
     <div className="p-4">
       <div className="max-w-4xl mx-auto">
         <div className="flex flex-col md:flex-row items-center md:items-start gap-6">
-          <div className="relative">
+          <div className="relative ">
             <Image
               alt="Profile picture"
-              className="rounded-full border"
-              height={150}
+              className="rounded-full border h-40 w-40"
+              height={160}
               src={user?.profileImage || "https://i.ibb.co/hBpV37F/avater.png"}
-              width={150}
+              width={160}
             />
             <button className="absolute bottom-0 right-0 bg-gray-800 text-white rounded-full p-2">
               Note...
@@ -47,10 +47,10 @@ export default function Profile() {
                 <strong>34</strong> posts
               </span>
               <span>
-                <strong>71</strong> followers
+                <strong>{user?.followers?.length}</strong> followers
               </span>
               <span>
-                <strong>77</strong> following
+                <strong>{user?.following?.length}</strong> following
               </span>
             </div>
             <div className="mb-4 text-black">

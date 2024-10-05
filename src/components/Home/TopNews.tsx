@@ -36,7 +36,9 @@ const TopNews = ({ posts }: PostProps) => {
                 {post?.title}
               </Link>
               <div className="flex items-center text-sm light light:text-[#F9F9F9]">
-                <span>By {post?.author?.name || "Author"}</span>
+                <span className="md:text-[14px] text-xs">
+                  By {post?.author?.name || "Author"}
+                </span>
                 <span className="mx-2">•</span>
                 <CalendarIcon className="w-4 h-4 mr-1" />
                 <span>

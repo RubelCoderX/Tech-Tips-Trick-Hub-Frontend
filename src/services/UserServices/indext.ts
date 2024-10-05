@@ -1,3 +1,4 @@
+"use server";
 import { revalidateTag } from "next/cache";
 
 import axiosInstance from "@/src/lib/AxiosInstence";
@@ -5,7 +6,7 @@ import axiosInstance from "@/src/lib/AxiosInstence";
 export const toggleFollow = async (followingId: string) => {
   try {
     const { data } = await axiosInstance.put(
-      `/user/${followingId}/follow-toggle`,
+      `/user/toggle-follow/${followingId}`
     );
 
     if (data.success) {

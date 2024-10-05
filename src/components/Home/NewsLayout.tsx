@@ -53,7 +53,9 @@ export default function NewsLayout({ posts }: PostProps) {
                   {post.title || "Post Title"}
                 </Link>
                 <div className="flex items-center text-sm">
-                  <span>By {post?.author?.name || "Author"}</span>
+                  <span className="md:text-[14px] text-xs">
+                    By {post?.author?.name || "Author"}
+                  </span>
                   <span className="mx-2">•</span>
                   <CalendarIcon className="w-4 h-4 mr-1" />
                   <span>
@@ -119,8 +121,6 @@ export default function NewsLayout({ posts }: PostProps) {
               <div className="grid grid-cols-3 gap-4">
                 {uniqueCategories.map((category, index) => {
                   const categoryImage = categoryImageMapping[category] || "";
-
-                  console.log(category, categoryImage);
 
                   return (
                     <div
