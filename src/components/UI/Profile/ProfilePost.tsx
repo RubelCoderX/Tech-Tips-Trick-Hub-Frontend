@@ -4,8 +4,31 @@ import { CalendarIcon } from "lucide-react";
 import { FaRegComment } from "react-icons/fa";
 
 import Container from "../Container";
+import PostCardSkeleton from "../Skeleton/PostCardSkeleton";
 
-const ProfilePost = ({ posts }) => {
+import { PostProps } from "@/src/types";
+
+const ProfilePost = ({ posts, postLoading }: PostProps) => {
+  if (postLoading) {
+    return <PostCardSkeleton />;
+  }
+  // Check if there are no posts
+  if (!posts || posts.length === 0) {
+    return (
+      <Container>
+        <div className="flex items-center justify-center h-[300px]  rounded-lg shadow-md">
+          <div className="text-center text-pink-500">
+            <h2 className="text-2xl font-bold  mb-2">No Posts Available</h2>
+            <p className="text-lg ">
+              It looks like there are currently no posts to display. Please
+              check back later or create a new post.
+            </p>
+          </div>
+        </div>
+      </Container>
+    );
+  }
+
   return (
     <Container>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">

@@ -1,4 +1,4 @@
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 
 import {
@@ -27,10 +27,13 @@ export const useGetAllUsers = () => {
 };
 
 export const useDeletedUser = () => {
+  const QueryClient = useQueryClient();
+
   return useMutation({
     mutationKey: ["delete-user"],
     mutationFn: async (id: string) => await deleteUser(id),
     onSuccess: () => {
+      QueryClient.invalidateQueries("users");
       toast.success("User deleted successfully.");
     },
     onError: () => {
@@ -40,14 +43,25 @@ export const useDeletedUser = () => {
 };
 
 export const useUpdateStatusUser = () => {
+  const QueryClient = useQueryClient();
+
   return useMutation({
     mutationKey: ["manage-status"],
-    mutationFn: async (id: string) => await updateStatusUser(id),
+    mutationFn: async ({
+      id,
+      action,
+    }: {
+      id: string;
+      action: "block" | "unblock";
+    }) => {
+      return await updateStatusUser(id, action);
+    },
     onSuccess: () => {
+      QueryClient.invalidateQueries("users");
       toast.success("User status updated successfully.");
     },
-    onError: () => {
-      toast.error("Failed to update user status. Please try again later.");
+    onError: (error: any) => {
+      toast.error(error.message);
     },
   });
 };

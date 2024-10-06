@@ -1,10 +1,14 @@
 import { FaCog, FaHome, FaUser, FaUsers } from "react-icons/fa";
-import { MdOutlinePayments, MdPostAdd } from "react-icons/md";
+import {
+  MdOutlinePayments,
+  MdOutlineSignpost,
+  MdPostAdd,
+} from "react-icons/md";
 
 export const userLinks = [
   { name: "Home", path: "/", icon: FaHome },
   { name: "Create Post", path: "/userDashboard/create-post", icon: MdPostAdd },
-  { name: "Settings", path: "/userDashboard/settings", icon: FaCog },
+  { name: "My Post", path: "/userDashboard/my-post", icon: MdOutlineSignpost },
   { name: "Profile", path: "/userDashboard/profile", icon: FaUser },
 ];
 

@@ -11,7 +11,7 @@ interface IProps extends IInput {
 export const TechTextArea = ({
   name,
   label,
-  radius,
+
   variant = "bordered",
 }: IProps) => {
   const {
@@ -23,7 +23,7 @@ export const TechTextArea = ({
   return (
     <Textarea
       {...register(name)}
-      errorMessage={errors[name] ? (errors[name].message as string) : ""}
+      errorMessage={errors[name] ? (errors[name]?.message as string) : ""}
       isInvalid={!!errors[name]}
       label={label}
       minRows={2}

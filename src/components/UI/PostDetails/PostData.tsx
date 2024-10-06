@@ -7,7 +7,6 @@ import { FieldValues, SubmitHandler } from "react-hook-form";
 import {
   CalendarDays,
   BarChart2,
-  EyeIcon,
   ThumbsDown,
   ThumbsUp,
   UserPlus,
@@ -20,6 +19,7 @@ import {
   Button,
   Divider,
 } from "@nextui-org/react";
+import { FaVoteYea } from "react-icons/fa";
 
 import TechForm from "../../form/TechForm";
 import { TechTextArea } from "../../form/TechTextAera";
@@ -33,7 +33,6 @@ import {
 } from "@/src/hooks/post.hooks";
 import { TPost } from "@/src/types";
 import { useToggleFollow } from "@/src/hooks/user.hook";
-import { FaVoteYea } from "react-icons/fa";
 
 const PostData = ({ post }: { post: TPost }) => {
   const { user } = useUser();
@@ -108,7 +107,7 @@ const PostData = ({ post }: { post: TPost }) => {
             <div>
               {post?.author?.followers?.includes(user?._id) ? (
                 <Button
-                  className="rounded bg-blue-700"
+                  className="rounded bg-blue-700 light light:text-white"
                   onClick={() => handleFollow(post?.author?._id)}
                 >
                   <UserPlus className="w-4 h-4 mr-1" />
@@ -116,7 +115,7 @@ const PostData = ({ post }: { post: TPost }) => {
                 </Button>
               ) : (
                 <Button
-                  className="rounded bg-blue-700"
+                  className="rounded bg-blue-700 light light:text-white"
                   onClick={() => handleFollow(post?.author?._id)}
                 >
                   <UserPlus className="w-4 h-4 mr-1" />
@@ -128,7 +127,7 @@ const PostData = ({ post }: { post: TPost }) => {
         </CardHeader>
         <CardBody>
           <h1 className="text-3xl font-bold mb-2">{post?.title}</h1>
-          <p className="text-muted-foreground mb-3 ">{post?.category}</p>
+
           <div className="relative mb-6">
             <Image
               alt="Snowy mountain landscape"
@@ -157,10 +156,10 @@ const PostData = ({ post }: { post: TPost }) => {
               Create Relevant Content
             </h2>
             <p className="mb-6">
-              You'll be posting loads of engaging content, so be sure to keep
+              You will be posting loads of engaging content, so be sure to keep
               your blog organized with Categories that also allow readers to
               explore more of what interests them. Each category of your blog
-              has its own page that's fully customizable. Add a catchy title, a
+              has its own page thats fully customizable. Add a catchy title, a
               brief description and a beautiful image to the category page
               header to truly make it your own. You can also add tags (#vacation
               #dream #summer) throughout your posts to reach more people, and
@@ -209,7 +208,7 @@ const PostData = ({ post }: { post: TPost }) => {
                 onClick={() =>
                   handleVotes(
                     post?._id,
-                    hasDownvoted ? "removeDownvote" : "downvote"
+                    hasDownvoted ? "removeDownvote" : "downvote",
                   )
                 }
               >

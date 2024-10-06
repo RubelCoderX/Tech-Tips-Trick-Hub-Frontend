@@ -8,7 +8,7 @@ export interface IInput {
   size?: "sm" | "md" | "lg";
   required?: boolean;
   type?: string;
-  label: string;
+  label?: string;
   name: string;
   disabled?: boolean;
 }
@@ -61,9 +61,14 @@ export interface TPost {
   createdAt: string;
   updatedAt: string;
   __v: number;
+  [key: string]: any;
 }
 export interface PostProps {
   posts: TPost[];
+  heroLoading: boolean;
+  layoutLoading: boolean;
+  topLoading: boolean;
+  postLoading: boolean;
 }
 
 export interface TAuthor {

@@ -22,10 +22,6 @@ import { siteConfig } from "@/src/config/site";
 import { ThemeSwitch } from "@/src/components/theme-switch";
 
 export const Navbar = () => {
-  // const { theme } = useTheme();
-  // const { theme } = useTheme(); // Get the current theme
-
-  // const navbarBackground = theme === "light" ? "bg-white" : "bg-[#2B2B2B]";
   const { user } = useUser();
 
   return (

@@ -11,7 +11,7 @@ export const createUser = async (userData: FieldValues) => {
 
     return res.data;
   } catch (error: any) {
-    throw new Error(error);
+    throw new Error(error.response.data.message || "Failed to create user");
   }
 };
 
@@ -27,7 +27,7 @@ export const loginUser = async (userData: FieldValues) => {
 
     return data;
   } catch (error: any) {
-    throw new Error(error);
+    throw new Error(error.response.data.message || "Failed to login user");
   }
 };
 
@@ -47,12 +47,12 @@ export const getCurrentUser = async () => {
       if (data.success) {
         return data.data;
       } else {
-        console.error("Failed to get user:", data.message);
+        throw new Error(data.message || "Failed to fetch user");
 
         return null;
       }
-    } catch (error) {
-      console.error("Error fetching user:", error);
+    } catch (error: any) {
+      throw new Error(error.response.data.message || "Failed to fetch user");
 
       return null;
     }
@@ -97,8 +97,8 @@ export const getNewAccessToken = async () => {
     });
 
     return res.data;
-  } catch (error) {
-    throw new Error("Failed to get new access token");
+  } catch (error: any) {
+    throw new Error(error.response.data.message || "Failed to refresh token");
   }
 };
 
@@ -112,5 +112,16 @@ export const updateUser = async (userId: string, userData: FieldValues) => {
     return res.data;
   } catch (error: any) {
     throw new Error(error.message || "Failed to update user");
+  }
+};
+export const userRoleUpdate = async (userId: string) => {
+  try {
+    const res = await axiosInstance.put(`/auth/toggole-user-role/${userId}`);
+
+    return res.data;
+  } catch (error: any) {
+    throw new Error(
+      error.response.data.message || "Failed to update user role",
+    );
   }
 };

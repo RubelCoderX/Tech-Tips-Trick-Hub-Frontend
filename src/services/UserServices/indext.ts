@@ -32,26 +32,25 @@ export const deleteUser = async (id: string) => {
   try {
     const { data } = await axiosInstance.delete(`/user/delete-user/${id}`);
 
-    if (data?.success) {
-      revalidateTag("user");
-    }
-
     return data;
   } catch (error: any) {
     throw new Error(error.message);
   }
 };
 
-export const updateStatusUser = async (id: string) => {
+export const updateStatusUser = async (
+  id: string,
+  action: "block" | "unblock",
+) => {
   try {
-    const { data } = await axiosInstance.put(`/user/manage-status/${id}`);
-
-    if (data?.success) {
-      revalidateTag("user");
-    }
+    const { data } = await axiosInstance.put(
+      `/user/manage-status/${id}/status`,
+      null,
+      { params: { action } },
+    );
 
     return data;
   } catch (error: any) {
-    throw new Error(error.message);
+    throw new Error(error?.response?.data?.message);
   }
 };

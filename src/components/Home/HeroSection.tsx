@@ -7,10 +7,15 @@ import { FaRegComment, FaVoteYea } from "react-icons/fa";
 
 import bannerImage from "../../assets/watch.jpg";
 import satelliteImage from "../../assets/satelight.jpg";
+import HeroSectionSkeleton from "../UI/Skeleton/HeroSectionSkeleton";
 
 import { PostProps } from "@/src/types";
 
-const HeroSection = ({ posts }: PostProps) => {
+const HeroSection = ({ posts, heroLoading }: PostProps) => {
+  if (heroLoading) {
+    return <HeroSectionSkeleton />;
+  }
+
   return (
     <div className="">
       <div className="grid grid-cols-1 md:grid-cols-2  lg:grid-cols-3">

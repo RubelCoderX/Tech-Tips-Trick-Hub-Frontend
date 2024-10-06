@@ -4,9 +4,17 @@ import Image from "next/image";
 import Link from "next/link";
 import { FaRegComment, FaVoteYea } from "react-icons/fa";
 
+import PostCardSkeleton from "../UI/Skeleton/PostCardSkeleton";
+
+import BannerSection from "./BannerSection";
+
 import { PostProps } from "@/src/types";
 
-const TopNews = ({ posts }: PostProps) => {
+const TopNews = ({ posts, topLoading }: PostProps) => {
+  if (topLoading) {
+    return <PostCardSkeleton />;
+  }
+
   return (
     <div className="container mx-auto ">
       <h1 className="text-4xl  mb-8 uppercase text-pink-500 font-bold">
@@ -60,23 +68,7 @@ const TopNews = ({ posts }: PostProps) => {
           </div>
         ))}
       </div>
-
-      {/* Banner section*/}
-      <section
-        className="cursor-pointer mt-10 relative overflow-hidden h-64"
-        style={{
-          backgroundImage: "url(https://i.ibb.co/vHV1HzM/banner-Imge.webp)",
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          transition: "transform 0.5s ease-in-out",
-        }}
-        onMouseEnter={(e) => {
-          e.currentTarget.style.transform = "scale(1.1)";
-        }}
-        onMouseLeave={(e) => {
-          e.currentTarget.style.transform = "scale(1)";
-        }}
-      />
+      <BannerSection />
     </div>
   );
 };
