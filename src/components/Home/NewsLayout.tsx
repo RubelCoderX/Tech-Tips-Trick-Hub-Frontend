@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import { CalendarIcon } from "lucide-react";
-import { FaRegComment } from "react-icons/fa";
+import { FaRegComment, FaVoteYea } from "react-icons/fa";
 import Link from "next/link";
 
 import bannerImage from "../../assets/watch.jpg";
@@ -35,7 +35,7 @@ export default function NewsLayout({ posts }: PostProps) {
                 <div className="transition-transform duration-300 group-hover:scale-110">
                   <Image
                     alt={post?.title || "Post Image"}
-                    className="w-96 h-40 object-cover"
+                    className="h-40 object-cover"
                     height={140}
                     src={post?.images[0] || bannerImage}
                     width={384}
@@ -52,7 +52,7 @@ export default function NewsLayout({ posts }: PostProps) {
                 >
                   {post.title || "Post Title"}
                 </Link>
-                <div className="flex items-center text-sm">
+                <div className="flex items-center md:text-[10px] text-[8px]">
                   <span className="md:text-[14px] text-xs">
                     By {post?.author?.name || "Author"}
                   </span>
@@ -61,6 +61,9 @@ export default function NewsLayout({ posts }: PostProps) {
                   <span>
                     {new Date(post?.createdAt).toLocaleDateString() || "Date"}
                   </span>
+                  <span className="mx-2">•</span>
+                  <FaVoteYea className="w-4 h-4 mr-2" />
+                  <span>{post?.upVotes?.length} upVotes</span>
                   <span className="mx-2">•</span>
                   <Link
                     className="flex items-center justify-center hover:text-pink-500 transition-colors"

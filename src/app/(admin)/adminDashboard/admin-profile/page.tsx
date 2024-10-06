@@ -1,10 +1,10 @@
 import Container from "@/src/components/UI/Container";
-import ManageUsersTable from "@/src/components/UI/ManageUsersTable/ManageUsersTable";
+import Profile from "@/src/components/UI/Profile/Profile";
 
 const Page = () => {
   return (
     <Container>
-      <ManageUsersTable />
+      <Profile />
     </Container>
   );
 };

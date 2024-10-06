@@ -33,6 +33,7 @@ import {
 } from "@/src/hooks/post.hooks";
 import { TPost } from "@/src/types";
 import { useToggleFollow } from "@/src/hooks/user.hook";
+import { FaVoteYea } from "react-icons/fa";
 
 const PostData = ({ post }: { post: TPost }) => {
   const { user } = useUser();
@@ -42,8 +43,7 @@ const PostData = ({ post }: { post: TPost }) => {
   const { mutate: createVote } = useVotePost();
   const [editingCommentId, setEditingCommentId] = useState<string | null>(null);
   const [content, setContent] = useState<string>("");
-  const [isLiked, setIsLiked] = useState<boolean>(false);
-  const [isDisliked, setIsDisliked] = useState<boolean>(false);
+
   const { mutate: createFollow } = useToggleFollow();
 
   const handleSubmitComment: SubmitHandler<FieldValues> = (data) => {
@@ -79,15 +79,11 @@ const PostData = ({ post }: { post: TPost }) => {
     createFollow(followingId);
   };
   const handleVotes = (postId: string, action: string) => {
-    if (action === "upvote") {
-      setIsLiked(true);
-      setIsDisliked(false);
-    } else if (action === "downvote") {
-      setIsDisliked(true);
-      setIsLiked(false);
-    }
     createVote({ postId, action });
   };
+  const hasUpvoted = post?.upVotes.includes(user?._id || "");
+
+  const hasDownvoted = post.downVotes.includes(user?._id || "");
 
   return (
     <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
@@ -112,16 +108,16 @@ const PostData = ({ post }: { post: TPost }) => {
             <div>
               {post?.author?.followers?.includes(user?._id) ? (
                 <Button
-                  onClick={() => handleFollow(post?.author?._id)}
                   className="rounded bg-blue-700"
+                  onClick={() => handleFollow(post?.author?._id)}
                 >
                   <UserPlus className="w-4 h-4 mr-1" />
                   Unfollow
                 </Button>
               ) : (
                 <Button
-                  onClick={() => handleFollow(post?.author?._id)}
                   className="rounded bg-blue-700"
+                  onClick={() => handleFollow(post?.author?._id)}
                 >
                   <UserPlus className="w-4 h-4 mr-1" />
                   Follow
@@ -178,7 +174,8 @@ const PostData = ({ post }: { post: TPost }) => {
           <div className="flex flex-wrap items-center justify-between w-full gap-4">
             <div className="flex space-x-4 items-center">
               <Button size="sm" variant="ghost">
-                <EyeIcon className="w-4 h-4 mr-2" />0 Views
+                <FaVoteYea className="w-4 h-4 mr-2" />
+                {post?.upVotes?.length || 0} Upvotes
               </Button>
               <Button size="sm" variant="ghost">
                 <BarChart2 className="w-4 h-4 mr-2" />
@@ -187,19 +184,34 @@ const PostData = ({ post }: { post: TPost }) => {
             </div>
             <div className="flex items-center space-x-2">
               <Button
-                className={isLiked ? "text-blue-500 border-blue-500" : ""}
+                className={`${
+                  hasUpvoted
+                    ? "bg-blue-500 text-white"
+                    : "text-blue-500 border-blue-500"
+                }`}
                 size="sm"
                 variant="bordered"
-                onClick={() => handleVotes(post?._id, "upvote")}
+                onClick={() =>
+                  handleVotes(post?._id, hasUpvoted ? "removeUpvote" : "upvote")
+                }
               >
                 <ThumbsUp className={"w-4 h-4 mr-2 "} />
                 Like
               </Button>
               <Button
-                className={isDisliked ? "text-red-500 border-red-500" : ""}
+                className={`${
+                  hasDownvoted
+                    ? "bg-red-500 text-white"
+                    : "text-red-500 border-red-500"
+                }`}
                 size="sm"
                 variant="bordered"
-                onClick={() => handleVotes(post?._id, "downvote")}
+                onClick={() =>
+                  handleVotes(
+                    post?._id,
+                    hasDownvoted ? "removeDownvote" : "downvote"
+                  )
+                }
               >
                 <ThumbsDown className={"w-4 h-4 mr-2"} />
                 Dislike

@@ -51,8 +51,8 @@ export interface TPost {
   category: string;
   tags: string[];
   isPremium: boolean;
-  upVotes: number;
-  downVotes: number;
+  upVotes: string[];
+  downVotes: string[];
   comments: any[];
   images: string[];
   status: string;

@@ -13,7 +13,19 @@ const MainNewsFeed = () => {
   const allPostData = data?.data || [];
 
   // Sort posts by upvotes
-  const sortedPosts = allPostData.sort((a, b) => b.upVotes - a.upVotes);
+  // const sortedPosts = allPostData.sort(
+  //   (a, b) => b.upVotes.length - a.upVotes.length
+  // );
+
+  const sortedPosts = allPostData.sort((a, b) => {
+    const upvoteDifference = b.upVotes.length - a.upVotes.length;
+
+    if (upvoteDifference !== 0) {
+      return upvoteDifference;
+    }
+
+    return a.downVotes.length - b.downVotes.length;
+  });
 
   return (
     <div>
