@@ -1,14 +1,10 @@
 "use client";
-import { useState } from "react";
-import { Tabs, Tab, Card, CardBody } from "@nextui-org/react";
+
 import Link from "next/link";
 
 import PremiumMonthlyMember from "@/src/components/UI/BecomeAmember/PremiumMonthlyMember";
-import PremiumYearlyMember from "@/src/components/UI/BecomeAmember/PremiumYearlyMember";
 
 export default function Page() {
-  const [selected, setSelected] = useState<string>("pay monthly");
-
   return (
     <div>
       <div>
@@ -34,31 +30,54 @@ export default function Page() {
       </div>
 
       {/* Payment options */}
-      <div className="flex justify-center max-w-3xl mx-auto mb-8">
-        <div className="flex w-full flex-col items-center">
-          <Tabs
-            aria-label="Options"
-            selectedKey={selected}
-            variant="bordered"
-            onSelectionChange={(key) => setSelected(key.toString())}
-          >
-            <Tab key="pay monthly" title="Pay Monthly">
-              <Card>
-                <CardBody>
-                  <PremiumMonthlyMember />
-                </CardBody>
-              </Card>
-            </Tab>
-            <Tab key="pay annually" title="Pay Annually">
-              <Card>
-                <CardBody>
-                  <PremiumYearlyMember />
-                </CardBody>
-              </Card>
-            </Tab>
-          </Tabs>
-        </div>
+      <div className="max-w-5xl grid grid-cols-3 gap-5 mx-auto">
+        {plans.map((plan, index) => (
+          <PremiumMonthlyMember key={index} plan={plan} />
+        ))}
       </div>
     </div>
   );
 }
+const plans = [
+  {
+    title: "Basic Plan",
+    expiry: " 2 Days",
+    price: "Free",
+    description:
+      "Access member-only stories and enjoy an enhanced reading and writing experience. Cancel anytime.",
+    benefits: [
+      "✓ Read member-only stories",
+      "✓ Support writers you read most",
+      "✓ Earn money for your writing",
+      "✓ Listen to audio narrations",
+      "✓ Access our Mastodon community",
+    ],
+  },
+  {
+    title: "Member",
+    expiry: "1 Week",
+    price: "299",
+    description:
+      "Contribute more to writers and strengthen your support for the Medium community. Cancel anytime.",
+    benefits: [
+      "✓ All Medium member benefits",
+      "✓ Give 4x more to the writers you read",
+      "✓ Share member-only stories with anyone ",
+      "✓ Customize app icon",
+    ],
+  },
+  {
+    title: "VIP Member",
+    expiry: "1 Month",
+    price: "499",
+    description:
+      "Get exclusive access to premium content and personalized recommendations. Cancel anytime.",
+    benefits: [
+      "✓ All Friend plan benefits",
+      "✓ Access to VIP events",
+      "✓ One-on-one support",
+      "✓ Premium content tailored for you",
+      "✓ Priority customer service",
+    ],
+  },
+];

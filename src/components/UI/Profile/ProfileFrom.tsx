@@ -1,4 +1,6 @@
 import { zodResolver } from "@hookform/resolvers/zod";
+import { ChangeEvent, useState } from "react";
+import { toast } from "sonner";
 
 import TechDatePicker from "../../form/TechDatePicker";
 import TechForm from "../../form/TechForm";
@@ -10,9 +12,7 @@ import { userUpdateValidationSchema } from "@/src/schema/login.schema";
 import { dateToISO } from "@/src/utils/dateToISo";
 import { useUser } from "@/src/context/user.provider";
 import { useUserUpdate } from "@/src/hooks/auth.hook";
-import { ChangeEvent, useState } from "react";
 import uploadImageToCloudinary from "@/src/utils/uploadImage";
-import { toast } from "sonner";
 
 const genderOptions = [
   { key: "select-gender", label: "Select Gender" },
@@ -24,7 +24,7 @@ const ProfileForm = () => {
   const { user, isSetLoading } = useUser();
 
   const [profileImage, setProfileImage] = useState<string | "">(
-    user?.profileImage as string
+    user?.profileImage as string,
   );
   const [imageUploadLoading, setImageUploadLoading] = useState(false);
 
@@ -39,7 +39,7 @@ const ProfileForm = () => {
 
   const userId = user?._id;
   const { mutate: updateUserMutate, isPending } = useUserUpdate(
-    userId as string
+    userId as string,
   );
 
   const onSubmit = async (data: any) => {
@@ -48,6 +48,7 @@ const ProfileForm = () => {
       birthDate: dateToISO(data.birthDate),
       profileImage: profileImage,
     };
+
     console.log(userData);
 
     try {

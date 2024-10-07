@@ -179,8 +179,8 @@ const RegisterPage = () => {
 
             <button
               className="w-full py-2 text-white mt-4 bg-red-500 font-semibold"
-              type="submit"
               disabled={imageUploadLoading}
+              type="submit"
             >
               Register
             </button>

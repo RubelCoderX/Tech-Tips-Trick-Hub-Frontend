@@ -1,10 +1,12 @@
 "use client";
 import { Checkbox } from "@nextui-org/react";
+import dynamic from "next/dynamic";
+import { useState } from "react";
+
 import TechForm from "../../form/TechForm";
 import { TechInput } from "../../form/TechInput";
 import TechSelect from "../../form/TechSelect";
-import dynamic from "next/dynamic";
-import { useState } from "react";
+
 import "react-quill/dist/quill.snow.css";
 import { categoryOptions } from "@/src/constant";
 
@@ -64,9 +66,9 @@ const CreatePost = () => {
           </div>
           <div>
             <TechSelect
-              options={categoryOptions}
               label="Select Category"
               name="category"
+              options={categoryOptions}
               radius="none"
               size="md"
               type="email"
@@ -87,18 +89,18 @@ const CreatePost = () => {
         </div>
         <div className="mt-4">
           <Checkbox
+            className="flex items-center text-lg"
             radius="full"
             value="ok"
             onChange={() => setIsPremium(!isPremium)}
-            className="flex items-center text-lg"
           >
             <span className="ml-2">Available for premium users only</span>
           </Checkbox>
         </div>
         <div className="mt-6 flex justify-center">
           <button
-            type="submit"
             className="px-5 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition duration-300"
+            type="submit"
           >
             Publish Post
           </button>

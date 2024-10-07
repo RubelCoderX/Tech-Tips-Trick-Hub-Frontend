@@ -52,20 +52,20 @@ export default function MyPostTable() {
           <div>
             <Input
               fullWidth
-              variant="bordered"
-              radius="none"
               placeholder="Search posts..."
+              radius="none"
               size="lg"
+              variant="bordered"
             />
           </div>
           <div>
             <Select
               items={categories}
-              variant="bordered"
-              radius="none"
               label="Categories"
               placeholder="Select an Option"
+              radius="none"
               size="sm"
+              variant="bordered"
             >
               {(categorie) => (
                 <SelectItem key={categorie?.key} variant="bordered">

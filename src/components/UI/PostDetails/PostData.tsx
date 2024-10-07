@@ -80,9 +80,8 @@ const PostData = ({ post }: { post: TPost }) => {
   const handleVotes = (postId: string, action: string) => {
     createVote({ postId, action });
   };
-  const hasUpvoted = post?.upVotes.includes(user?._id || "");
-
-  const hasDownvoted = post.downVotes.includes(user?._id || "");
+  const hasUpvoted = post?.upVotes?.includes(user?._id || "");
+  const hasDownvoted = post?.downVotes?.includes(user?._id || "");
 
   return (
     <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
@@ -208,7 +207,7 @@ const PostData = ({ post }: { post: TPost }) => {
                 onClick={() =>
                   handleVotes(
                     post?._id,
-                    hasDownvoted ? "removeDownvote" : "downvote",
+                    hasDownvoted ? "removeDownvote" : "downvote"
                   )
                 }
               >

@@ -1,9 +1,9 @@
 import React from "react";
 import { User, Tooltip, Button } from "@nextui-org/react";
+import { useRouter } from "next/navigation";
 
 import { useDeletedUser, useUpdateStatusUser } from "@/src/hooks/user.hook";
 import { useUpdateUserRole } from "@/src/hooks/auth.hook";
-import { useRouter } from "next/navigation";
 
 interface IMangeUserCellProps {
   columnKey: string;

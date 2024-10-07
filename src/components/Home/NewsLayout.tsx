@@ -3,6 +3,7 @@ import Image from "next/image";
 import { CalendarIcon } from "lucide-react";
 import { FaRegComment, FaVoteYea } from "react-icons/fa";
 import Link from "next/link";
+import { Checkbox, Divider, Input } from "@nextui-org/react";
 
 import bannerImage from "../../assets/watch.jpg";
 import LayoutSkeleton from "../UI/Skeleton/LayoutSkeleton";
@@ -18,49 +19,56 @@ const categoryImageMapping: Record<string, string> = {
 };
 
 export default function NewsLayout({ posts, layoutLoading }: PostProps) {
-  const uniqueCategories = [...new Set(posts.map((post) => post.category))];
+  const categories = ["Mobiles", "Laptops", "Gadgets", "Photography", "Gaming"];
 
   if (layoutLoading) {
     return <LayoutSkeleton />;
   }
 
   return (
-    <div className="container mx-auto  py-8 mt-16">
-      <h1 className="text-3xl sm:text-4xl font-bold mb-8 text-pink-500">
-        Whats New
-      </h1>
-      <div className="grid grid-cols-1  lg:grid-cols-3 gap-8">
-        <div className="lg:col-span-2 space-y-8 border-r">
+    <div className="flex flex-col lg:flex-row  min-h-screen mt-20">
+      <div className="lg:w-2/3 p-4">
+        <div>
+          <h1 className="text-3xl sm:text-4xl font-bold mb-8 text-pink-500 text-center sm:text-left">
+            What&apos;s New
+          </h1>
+          <Divider />
+        </div>
+
+        {/* Blog Feed */}
+        <div className="space-y-8">
           {posts.slice(6).map((post) => (
             <div
               key={post?._id}
-              className="flex flex-col cursor-pointer md:flex-row overflow-hidden border-b border-gray-300 pb-4 last:border-b-0"
+              className="flex flex-col md:flex-row cursor-pointer overflow-hidden border-b border-gray-300 pb-4 last:border-b-0"
             >
-              <div className="relative overflow-hidden group max-w-[400px]">
-                <div className="transition-transform duration-300 group-hover:scale-110 ">
+              {/* Image Section */}
+              <div className="relative overflow-hidden group max-w-full md:max-w-[400px] h-48">
+                <div className="transition-transform duration-300 group-hover:scale-110">
                   <Image
                     alt={post?.title || "Post Image"}
-                    className="w-full h-auto max-w-[400px] object-cover"
+                    className="w-full h-full object-cover"
                     height={140}
                     src={post?.images[0] || bannerImage}
                     width={384}
                   />
                 </div>
               </div>
-              <div className="p-4 space-y-2">
+
+              {/* Text Content */}
+              <div className="p-4 space-y-2 ">
                 <span className="bg-pink-500 text-white text-xs font-semibold px-2 py-1 uppercase">
                   {post?.category || "Category"}
                 </span>
                 <Link
-                  className="text-xl block hover:text-pink-500 md:text-2xl font-bold mb-2 cursor-pointer hover:underline transition duration-300 ease-in-out"
+                  className="text-xl sm:text-2xl lg:text-3xl block hover:text-pink-500 font-bold mb-2 cursor-pointer hover:underline transition duration-300 ease-in-out max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg"
                   href={`/${post?._id}`}
                 >
                   {post.title || "Post Title"}
                 </Link>
-                <div className="flex items-center md:text-[10px] text-[8px]">
-                  <span className="md:text-[14px] text-xs">
-                    By {post?.author?.name || "Author"}
-                  </span>
+
+                <div className="flex items-center text-xs md:text-sm">
+                  <span>By {post?.author?.name || "Author"}</span>
                   <span className="mx-2">•</span>
                   <CalendarIcon className="w-4 h-4 mr-1" />
                   <span>
@@ -71,10 +79,10 @@ export default function NewsLayout({ posts, layoutLoading }: PostProps) {
                   <span>{post?.upVotes?.length} upVotes</span>
                   <span className="mx-2">•</span>
                   <Link
-                    className="flex items-center justify-center hover:text-pink-500 transition-colors"
+                    className="flex items-center hover:text-pink-500 transition-colors"
                     href={`/${post._id}#comment`}
                   >
-                    <FaRegComment className="w-4 h-4 mr-1 cursor-pointer" />
+                    <FaRegComment className="w-4 h-4 mr-1" />
                     <span>{post?.comments?.length || "No"} Comments</span>
                   </Link>
                 </div>
@@ -82,81 +90,47 @@ export default function NewsLayout({ posts, layoutLoading }: PostProps) {
             </div>
           ))}
         </div>
+      </div>
 
-        <div className="space-y-8">
-          {/* search section */}
-          <div className="bg-blue-900 text-white p-6">
-            <h3 className="text-xl sm:text-2xl font-bold mb-2">
-              Unlock Exclusive Benefits as a Premium Member
-            </h3>
-            <p className="mb-4">
-              Join our premium membership to gain access to special offers,
-              personalized content, and advanced features designed to elevate
-              your experience.
-            </p>
-            <button className="bg-red-500 text-white px-4 py-2 rounded-full mt-4">
-              UPGRADE NOW
-            </button>
-          </div>
+      {/* Sidebar */}
+      <aside className="lg:w-1/4 lg:sticky  light md:pt-16 p-4">
+        <div className="mb-6 ">
+          <Input
+            label="Search here..."
+            name="search"
+            radius="none"
+            type="text"
+            variant="bordered"
+          />
+        </div>
 
-          {/* Categories Section */}
-          {/* <div className="cursor-pointer">
-            <h3 className="text-xl sm:text-2xl font-bold mb-4">Categories</h3>
-
-            <div className="grid grid-cols-2 gap-4">
-              {uniqueCategories.map((category, index) => (
-                <div key={index} className="relative">
-                  <Image
-                    alt={category}
-                    className="w-full h-20 object-cover"
-                    height={100}
-                    src={satelliteImage}
-                    width={100}
-                  />
-                  <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-                    <span className="text-white font-semibold">{category}</span>
-                  </div>
-                </div>
-              ))}
+        {/* Categories Section */}
+        <div className="mb-6">
+          <h3 className="text-xl font-bold mb-3">Categories</h3>
+          {categories.map((category) => (
+            <div key={category} className="mb-2">
+              <Checkbox defaultSelected color="primary">
+                {category}
+              </Checkbox>
             </div>
-          </div> */}
-          <div className="space-y-8">
-            {/* Categories Section */}
-            <div className="cursor-pointer">
-              <h3 className="text-xl sm:text-2xl font-bold mb-4">Categories</h3>
-              <hr className="border-gray-300 mb-4" />
+          ))}
+        </div>
 
-              <div className="grid grid-cols-3 gap-4">
-                {uniqueCategories.map((category, index) => {
-                  const categoryImage = categoryImageMapping[category] || "";
-
-                  return (
-                    <div
-                      key={index}
-                      className="relative overflow-hidden group w-36 h-36 gap-2"
-                    >
-                      <div className="transition-transform duration-300 group-hover:scale-110 h-full w-full">
-                        <Image
-                          alt={category}
-                          className="object-cover h-full w-full"
-                          height={144}
-                          src={categoryImage}
-                          width={144}
-                        />
-                        <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-                          <span className="text-white font-semibold">
-                            {category}
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
+        {/* Rating Filter Section */}
+        <div>
+          <h3 className="text-xl font-bold mb-3">Filter by Likes</h3>
+          <div className="flex flex-wrap gap-2">
+            {[500, 400, 300, 200, 100].map((rating) => (
+              <button
+                key={rating}
+                className="bg-gray-700 hover:bg-gray-600 text-white px-3 py-1 rounded"
+              >
+                {rating}+ Likes
+              </button>
+            ))}
           </div>
         </div>
-      </div>
+      </aside>
     </div>
   );
 }

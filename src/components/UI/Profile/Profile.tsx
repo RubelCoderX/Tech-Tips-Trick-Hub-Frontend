@@ -17,10 +17,10 @@ export default function Profile() {
       <Divider className="my-8" />
       <div className="h-[calc(100vh-350px)] overflow-y-auto">
         <ProfilePost
-          postLoading={isLoading}
-          posts={post}
           heroLoading={false}
           layoutLoading={false}
+          postLoading={isLoading}
+          posts={post}
           topLoading={false}
         />
       </div>

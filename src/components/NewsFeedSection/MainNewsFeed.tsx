@@ -38,6 +38,7 @@ const MainNewsFeed = () => {
         <HeroSection
           heroLoading={isLoading}
           layoutLoading={false}
+          postLoading={false}
           posts={sortedPosts}
           topLoading={false}
         />
@@ -46,6 +47,7 @@ const MainNewsFeed = () => {
             <TopNews
               heroLoading={false}
               layoutLoading={false}
+              postLoading={false}
               posts={sortedPosts}
               topLoading={isLoading}
             />
@@ -53,6 +55,7 @@ const MainNewsFeed = () => {
             <NewsLayout
               heroLoading={false}
               layoutLoading={isLoading}
+              postLoading={false}
               posts={sortedPosts}
               topLoading={false}
             />
