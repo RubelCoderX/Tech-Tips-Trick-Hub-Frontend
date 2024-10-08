@@ -49,8 +49,6 @@ const ProfileForm = () => {
       profileImage: profileImage,
     };
 
-    console.log(userData);
-
     try {
       await updateUserMutate(userData);
       isSetLoading(true);

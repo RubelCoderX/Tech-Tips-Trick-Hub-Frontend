@@ -18,13 +18,13 @@ export async function middleware(request: NextRequest) {
 
   // If user is not logged in
   if (!user) {
-    if (AuthRoutes.includes(pathname)) {
+    if (AuthRoutes?.includes(pathname)) {
       // Allow access to auth-related routes
       return NextResponse.next();
     } else {
       // Redirect to login if trying to access restricted routes
       return NextResponse.redirect(
-        new URL(`/login?redirect=${pathname}`, request.url),
+        new URL(`/login?redirect=${pathname}`, request.url)
       );
     }
   }

@@ -1,53 +1,86 @@
-# Next.js & NextUI Template
+<div align="center">
+  <h1>Tech Tips & Tricks Hub</h1>
+</div>
 
-This is a template for creating applications using Next.js 14 (app directory) and NextUI (v2).
+## Credintials
 
-[Try it on CodeSandbox](https://githubbox.com/nextui-org/next-app-template)
+admin_email : princerubel29879@gmail.com
+admin_password : admin12345
 
-## Technologies Used
+user_email : mdrubel29879@gmail.com
+user_password: admin@1234
 
-- [Next.js 14](https://nextjs.org/docs/getting-started)
-- [NextUI v2](https://nextui.org/)
-- [Tailwind CSS](https://tailwindcss.com/)
-- [Tailwind Variants](https://tailwind-variants.org)
-- [TypeScript](https://www.typescriptlang.org/)
-- [Framer Motion](https://www.framer.com/motion/)
-- [next-themes](https://github.com/pacocoursey/next-themes)
+## Introduction
 
-## How to Use
+Welcome to Tech Tips & Tricks Hub, your go-to platform for premium adventures! This project is designed to provide a seamless and engaging experience for exploring tips, tricks, and securing premium memberships for your next journey.
 
-### Use the template with create-next-app
+## Project Description
 
-To create a new project based on this template using `create-next-app`, run the following command:
+The Tech Tips & Tricks Hub is an application crafted to offer a wide selection of campers for various journeys. With a focus on ease of use, the platform allows users to browse, search, filter, and manage products effortlessly. The project is built using a modern technology stack that ensures scalability, high performance, and maintainability.
 
-```bash
-npx create-next-app -e https://github.com/nextui-org/next-app-template
-```
+## Features
 
-### Install dependencies
+- User-friendly product browsing experience
+- Advanced search and filtering capabilities
+- Product management for admins (CRUD operations)
+- Responsive design for all devices
+- Secure payment integration with AmaarPay
 
-You can use one of them `npm`, `yarn`, `pnpm`, `bun`, Example using `npm`:
+## Technology Stack
 
-```bash
-npm install
-```
+# Frontend
 
-### Run the development server
+- Next.js: Framework for React applications
+- Redux: State management library.
+- Tailwind CSS: Utility-first CSS framework
+- React form Hook: Custom hooks for logic reusability
 
-```bash
-npm run dev
-```
+# Backend
 
-### Setup pnpm (optional)
+- Express: Web framework for Node.js
+- Node.js: JavaScript runtime
+- MongoDB: NoSQL database
+- TypeScript: Superset of JavaScript for type safety
 
-If you are using `pnpm`, you need to add the following code to your `.npmrc` file:
+## Installation Guideline
 
-```bash
-public-hoist-pattern[]=*@nextui-org/*
-```
+# Frontend
 
-After modifying the `.npmrc` file, you need to run `pnpm install` again to ensure that the dependencies are installed correctly.
+1. Clone the repository:
 
-## License
+- git clone https://github.com/RubelCoderX/Tech-Tips-Trick-Hub-Frontend
 
-Licensed under the [MIT license](https://github.com/nextui-org/next-app-template/blob/main/LICENSE).
+2. Install frontend dependencies:
+
+- cd folder name
+- yarn or npm install
+
+# Backend
+
+1. git clone https://github.com/princeRubel1/princeRubel1-Car-Rental-Reservation-System-Backend
+
+2. Install frontend dependencies:
+
+- cd folder name
+- yarn or npm install
+
+### Prerequisites
+
+- Node.js
+- MongoDB
+- Yarn or npm
+
+### Configuration
+
+1. Create a `.env` file in the root directory of the project.
+2. Add necessary configuration variables in the `.env` file.
+   Example:
+   ```bash
+    PORT=4000
+    DB_URL=your_db_connection_uri
+    API_KEY=your_api_key_here
+   ```
+
+# Conclusion
+
+With a robust backend and user-friendly frontend, Tech Tips & Tricks Hub ensures a smooth experience for users and administrators alike. Enjoy browsing, managing, and exploring with seamless navigation and secure payments!

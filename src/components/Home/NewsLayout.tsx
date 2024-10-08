@@ -10,14 +10,6 @@ import LayoutSkeleton from "../UI/Skeleton/LayoutSkeleton";
 
 import { PostProps } from "@/src/types";
 
-const categoryImageMapping: Record<string, string> = {
-  Mobile: "https://i.ibb.co/JtjMps6/mobile.webp",
-  Macbook: "https://i.ibb.co/SKWQS6T/macbook.jpg",
-  Gaming: "https://i.ibb.co/QbD56cY/gamingcontrol.jpg",
-  Tech: "https://i.ibb.co/NV5f5Td/tech.webp",
-  Watch: "https://i.ibb.co/16wN032/watch.jpg",
-};
-
 export default function NewsLayout({ posts, layoutLoading }: PostProps) {
   const categories = ["Mobiles", "Laptops", "Gadgets", "Photography", "Gaming"];
 
@@ -26,13 +18,13 @@ export default function NewsLayout({ posts, layoutLoading }: PostProps) {
   }
 
   return (
-    <div className="flex flex-col lg:flex-row  min-h-screen mt-20">
+    <div className="flex flex-col lg:flex-row  mt-20">
       <div className="lg:w-10/12 p-4">
         <div>
           <h1 className="text-3xl sm:text-4xl font-bold mb-8 text-pink-500 text-center sm:text-left">
             What&apos;s New
           </h1>
-          <Divider />
+          <Divider className="my-6" />
         </div>
 
         {/* Blog Feed */}
@@ -108,7 +100,7 @@ export default function NewsLayout({ posts, layoutLoading }: PostProps) {
         </div>
 
         {/* Categories Section */}
-        <div className="mb-6">
+        <div className="mb-6 text-default">
           <h3 className="text-xl font-bold mb-3">Categories</h3>
           {categories.map((category) => (
             <div key={category} className="mb-2">

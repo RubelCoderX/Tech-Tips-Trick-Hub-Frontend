@@ -1,6 +1,5 @@
 import React from "react";
 import { User, Tooltip, Button } from "@nextui-org/react";
-import { useRouter } from "next/navigation";
 
 import { useDeletedUser, useUpdateStatusUser } from "@/src/hooks/user.hook";
 import { useUpdateUserRole } from "@/src/hooks/auth.hook";
@@ -13,10 +12,10 @@ const ManaeUserCell: React.FC<IMangeUserCellProps> = ({ columnKey, user }) => {
   const { mutate: createDeleteUser } = useDeletedUser();
   const { mutate: createUpdateStatusUser } = useUpdateStatusUser();
   const { mutate: createUpdateRole } = useUpdateUserRole();
-  const router = useRouter();
-  const viewUser = (id: string) => {
-    router.push(`/userDashboard/profile?userId=${id}`);
-  };
+  // const router = useRouter();
+  // const viewUser = (id: string) => {
+  //   router.push(`/userDashboard/profile?userId=${id}`);
+  // };
   const handleDeleteUser = (id: string) => {
     createDeleteUser(id);
   };

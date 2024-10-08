@@ -7,12 +7,12 @@ import {
   paymentMethod,
 } from "../services/PaymentServices";
 
-interface PaymentData {
-  user: string | undefined;
-  price: string;
-  title: string;
-  expiry: string;
-}
+// interface PaymentData {
+//   user: string | undefined;
+//   price: string;
+//   title: string;
+//   expiry: string;
+// }
 interface PremiumPlanData {
   user: string | undefined;
   price: string;
@@ -45,8 +45,6 @@ export const useGetAllPayment = () => {
 };
 
 export const useGetSinglePayment = (id: string) => {
-  console.log(id);
-
   return useQuery({
     queryKey: ["single-payment", id],
     queryFn: async () => {

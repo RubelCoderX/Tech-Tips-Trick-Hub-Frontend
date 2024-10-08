@@ -32,8 +32,6 @@ export const getSinglePayment = async (id: string) => {
   try {
     const response = await axiosInstance.get(`/payment/get-single/${id}`);
 
-    console.log(response.data);
-
     return response.data;
   } catch (error: any) {
     throw new Error(error.res.data.message);

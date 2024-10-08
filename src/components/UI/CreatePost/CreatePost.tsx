@@ -6,6 +6,7 @@ import { toast } from "sonner";
 
 import TechForm from "../../form/TechForm";
 import { TechInput } from "../../form/TechInput";
+// eslint-disable-next-line import/order
 import TechSelect from "../../form/TechSelect";
 
 import "react-quill/dist/quill.snow.css";

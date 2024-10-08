@@ -197,7 +197,7 @@ const PostData = ({ post }: { post: TPost }) => {
                   onClick={() =>
                     handleVotes(
                       post?._id,
-                      hasUpvoted ? "removeUpvote" : "upvote"
+                      hasUpvoted ? "removeUpvote" : "upvote",
                     )
                   }
                 >
@@ -215,7 +215,7 @@ const PostData = ({ post }: { post: TPost }) => {
                   onClick={() =>
                     handleVotes(
                       post?._id,
-                      hasDownvoted ? "removeDownvote" : "downvote"
+                      hasDownvoted ? "removeDownvote" : "downvote",
                     )
                   }
                 >
@@ -284,7 +284,7 @@ const PostData = ({ post }: { post: TPost }) => {
                               onClick={() =>
                                 handleEditComments(
                                   comment._id,
-                                  comment?.content
+                                  comment?.content,
                                 )
                               }
                             >
