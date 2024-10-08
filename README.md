@@ -1,14 +1,16 @@
-<div align="center">
-  <h1>Tech Tips & Tricks Hub</h1>
-</div>
+  <div align="center"> <a href="https://tech-tips-trick-hub-frontend-lac.vercel.app/" target="_blank" style="text-decoration: none; color: inherit;">
+      🚀 Tech Tips & Tricks Hub
+    </a></div>
 
-## Credintials
+## admin Credintials
 
-admin_email : princerubel29879@gmail.com
-admin_password : admin12345
+- admin_email : princerubel29879@gmail.com
+- admin_password : admin12345
 
-user_email : mdrubel29879@gmail.com
-user_password: admin@1234
+## admin Credintials
+
+- user_email : mdrubel29879@gmail.com
+- user_password: admin@1234
 
 ## Introduction
 
@@ -31,7 +33,7 @@ The Tech Tips & Tricks Hub is an application crafted to offer a wide selection o
 # Frontend
 
 - Next.js: Framework for React applications
-- Redux: State management library.
+- Axios: Promise-based HTTP client for making API requests
 - Tailwind CSS: Utility-first CSS framework
 - React form Hook: Custom hooks for logic reusability
 
@@ -57,7 +59,7 @@ The Tech Tips & Tricks Hub is an application crafted to offer a wide selection o
 
 # Backend
 
-1. git clone https://github.com/princeRubel1/princeRubel1-Car-Rental-Reservation-System-Backend
+1. git clone https://github.com/RubelCoderX/Tech-Tips-Trick-Hub-Backend
 
 2. Install frontend dependencies:
 
