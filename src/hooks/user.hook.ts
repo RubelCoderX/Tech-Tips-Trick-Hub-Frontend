@@ -33,7 +33,7 @@ export const useDeletedUser = () => {
     mutationKey: ["delete-user"],
     mutationFn: async (id: string) => await deleteUser(id),
     onSuccess: () => {
-      QueryClient.invalidateQueries("users");
+      QueryClient.invalidateQueries({ queryKey: ["users"] });
       toast.success("User deleted successfully.");
     },
     onError: () => {
@@ -57,7 +57,7 @@ export const useUpdateStatusUser = () => {
       return await updateStatusUser(id, action);
     },
     onSuccess: () => {
-      QueryClient.invalidateQueries("users");
+      QueryClient.invalidateQueries({ queryKey: ["users"] });
       toast.success("User status updated successfully.");
     },
     onError: (error: any) => {

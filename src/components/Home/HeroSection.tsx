@@ -27,7 +27,7 @@ const HeroSection = ({ posts, heroLoading }: PostProps) => {
                 alt={posts[0]?.title || "Main Article"}
                 className="object-cover w-full h-[700px] cursor-pointer transition-transform duration-300 hover:scale-110"
                 height={900}
-                src={posts[0]?.images[0] || bannerImage}
+                src={posts[0]?.thumbnailImage || bannerImage}
                 width={800}
               />
             </div>
@@ -76,7 +76,7 @@ const HeroSection = ({ posts, heroLoading }: PostProps) => {
                   alt={article.title || "Article Image"}
                   className="object-cover cursor-pointer w-full h-[350px] transition-transform duration-300 hover:scale-110"
                   height={300}
-                  src={article.images[0] || satelliteImage}
+                  src={article?.thumbnailImage || satelliteImage}
                   width={400}
                 />
               </div>

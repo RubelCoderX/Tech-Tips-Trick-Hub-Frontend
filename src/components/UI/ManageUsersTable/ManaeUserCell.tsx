@@ -34,7 +34,7 @@ const ManaeUserCell: React.FC<IMangeUserCellProps> = ({ columnKey, user }) => {
         <User
           avatarProps={{ radius: "lg", src: user.profileImage }}
           description={user?.email}
-          name={cellValue}
+          name={user?.name}
         >
           {user?.email}
         </User>

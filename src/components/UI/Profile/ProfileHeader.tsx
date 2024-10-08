@@ -1,5 +1,6 @@
 "use client";
 import Image from "next/image";
+import { BadgeCheck } from "lucide-react";
 
 import TechModal from "../Modals/TechModal";
 
@@ -26,16 +27,18 @@ const ProfileHeader = () => {
             src={user?.profileImage || "https://i.ibb.co/hBpV37F/avater.png"}
             width={160}
           />
-
-          <button className="absolute bottom-0 right-0 bg-gray-800 text-white rounded-full p-2">
-            Note...
-          </button>
         </div>
         <div className="flex-grow text-center md:text-left">
           <div className="flex flex-col md:flex-row items-center justify-between mb-4">
-            <h1 className="text-2xl font-semibold mb-2  md:mb-0">
-              {user?.userName}
+            <h1 className="text-2xl font-semibold mb-2 md:mb-0 flex items-center">
+              {user?.name}
+              {user?.isVerified && (
+                <span className="ml-2 inline-flex items-center justify-center bg-blue-500 text-white font-bold text-xs rounded-full ">
+                  <BadgeCheck />
+                </span>
+              )}
             </h1>
+
             <div className="space-x-2">
               <TechModal
                 buttonText="Edit Profile"
@@ -56,10 +59,13 @@ const ProfileHeader = () => {
             </span>
           </div>
           <div className="mb-4 text-black">
-            <h2 className="font-semibold text-xl light light:text-[#1A1A1A] dark dark:text-[#F9F9F9]">
-              {user?.name}
-            </h2>
-            <p className="light  light:text-[#1A1A1A] dark dark:text-[#F9F9F9]">
+            {/* <div className="relative">
+              <h2 className="font-semibold text-xl light light:text-[#1A1A1A] dark dark:text-[#F9F9F9]">
+                {user?.name}
+              </h2>
+              <button className="absolute bottom-0 right-0 bg-gray-800 text-white rounded-full p-2"></button>
+            </div> */}
+            <p className="light text-xl light:text-[#1A1A1A] dark dark:text-[#F9F9F9]">
               {user?.profession}
             </p>
             <p className="light text-[12px] light:text-[#1A1A1A] dark dark:text-[#F9F9F9]">

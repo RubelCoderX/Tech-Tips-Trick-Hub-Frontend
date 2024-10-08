@@ -1,9 +1,19 @@
-import { useMutation } from "@tanstack/react-query";
-
-import { paymentMethod } from "../services/PaymentServices";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { toast } from "sonner";
 
+import {
+  getAllPayment,
+  getSinglePayment,
+  paymentMethod,
+} from "../services/PaymentServices";
+
 interface PaymentData {
+  user: string | undefined;
+  price: string;
+  title: string;
+  expiry: string;
+}
+interface PremiumPlanData {
   user: string | undefined;
   price: string;
   title: string;
@@ -13,7 +23,7 @@ interface PaymentData {
 export const usePayment = () => {
   return useMutation({
     mutationKey: ["payment"],
-    mutationFn: async (data) => {
+    mutationFn: async (data: PremiumPlanData) => {
       return await paymentMethod(data);
     },
     onSuccess: (data) => {
@@ -23,6 +33,30 @@ export const usePayment = () => {
     },
     onError: () => {
       toast.error("Failed to process payment!");
+    },
+  });
+};
+
+export const useGetAllPayment = () => {
+  return useQuery({
+    queryKey: ["all-payment"],
+    queryFn: async () => await getAllPayment(),
+  });
+};
+
+export const useGetSinglePayment = (id: string) => {
+  console.log(id);
+
+  return useQuery({
+    queryKey: ["single-payment", id],
+    queryFn: async () => {
+      const response = await getSinglePayment(id);
+
+      if (!response.data) {
+        throw new Error("Payment data not found");
+      }
+
+      return response.data;
     },
   });
 };

@@ -1,10 +1,13 @@
 "use Client";
 
+import Container from "@/src/components/UI/Container";
+import UserDashboard from "@/src/components/UI/UserDashBord/UserDashBoard";
+
 const Page = () => {
   return (
-    <div>
-      <h2>user profile</h2>
-    </div>
+    <Container>
+      <UserDashboard />
+    </Container>
   );
 };
 

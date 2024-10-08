@@ -13,13 +13,17 @@ export const categories = [
 ];
 
 export const categoryOptions = [
-  { label: "Watch", value: "watch" },
-  { label: "Software Engineering", value: "software_engineering" },
-  { label: "Tech", value: "tech" },
-  { label: "ML", value: "ml" },
-  { label: "VR", value: "vr" },
-  { label: "Mobile", value: "mobile" },
-  { label: "Macbook", value: "macbook" },
-  { label: "Gaming", value: "gaming" },
-  { label: "Others", value: "others" },
+  { key: "Watch", label: "Watch", value: "Watch" },
+  {
+    key: "Software Engineering",
+    label: "Software Engineering",
+    value: "Software Engineering",
+  },
+  { key: "Tech", label: "Tech", value: "Tech" },
+  { key: "ML", label: "ML", value: "ML" },
+  { key: "VR", label: "VR", value: "VR" },
+  { key: "Mobile", label: "Mobile", value: "Mobile" },
+  { key: "Macbook", label: "Macbook", value: "Macbook" },
+  { key: "Gaming", label: "Gaming", value: "Gaming" },
+  { key: "Others", label: "Others", value: "Others" },
 ];

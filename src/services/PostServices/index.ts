@@ -3,6 +3,7 @@ import { revalidateTag } from "next/cache";
 
 import axiosInstance from "@/src/lib/AxiosInstence";
 import { envConfig } from "@/src/config/envConfig";
+import { ICreatePost, IUpdatePost } from "@/src/types";
 
 export const getAllPosts = async () => {
   const res = await axiosInstance.get("/post");
@@ -106,5 +107,45 @@ export const getMyPosts = async () => {
     return data;
   } catch (error: any) {
     throw new Error(error);
+  }
+};
+
+export const createPost = async (postData: ICreatePost) => {
+  try {
+    const { data } = await axiosInstance.post("/post/create-post", postData);
+
+    if (data?.success) {
+      revalidateTag("post");
+
+      return null;
+    }
+  } catch (error: any) {
+    throw new Error(error?.response?.data?.message || error);
+  }
+};
+
+export const updatePost = async (postId: string, postData: IUpdatePost) => {
+  try {
+    const { data } = await axiosInstance.put(`/post/${postId}`, postData);
+
+    if (data?.success) {
+      revalidateTag("post");
+
+      return null;
+    }
+  } catch (error: any) {
+    throw new Error(error?.response?.data?.message || error);
+  }
+};
+
+export const deletePost = async (postId: string) => {
+  try {
+    const { data } = await axiosInstance.delete(`/post/${postId}`);
+
+    if (data?.success) {
+      return data;
+    }
+  } catch (error: any) {
+    throw new Error(error?.response?.data?.message);
   }
 };

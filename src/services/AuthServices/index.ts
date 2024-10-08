@@ -45,14 +45,14 @@ export const getCurrentUser = async () => {
       const { data } = await axiosInstance.get("/user/get-me");
 
       if (data.success) {
-        return data.data;
+        return data?.data;
       } else {
-        throw new Error(data.message || "Failed to fetch user");
+        throw new Error(data?.message || "Failed to fetch user");
 
         return null;
       }
     } catch (error: any) {
-      throw new Error(error.response.data.message || "Failed to fetch user");
+      throw new Error(error.response?.data?.message || "Failed to fetch user");
 
       return null;
     }

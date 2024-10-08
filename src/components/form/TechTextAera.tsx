@@ -1,11 +1,13 @@
 import { Textarea } from "@nextui-org/input";
 import { useFormContext, useWatch } from "react-hook-form";
+import { ReactNode } from "react";
 
 import { IInput } from "@/src/types";
 
 interface IProps extends IInput {
   type?: string;
   radius?: "none" | "sm" | "md" | "lg" | "xl";
+  label: ReactNode;
 }
 
 export const TechTextArea = ({

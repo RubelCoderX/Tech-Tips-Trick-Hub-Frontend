@@ -1,10 +1,9 @@
 "use client";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { AiOutlineClose } from "react-icons/ai"; // Using React Icons for the close button
+import { AiOutlineClose } from "react-icons/ai";
 
 const BecomeAmember = () => {
-  // State to control the visibility of the banner
   const [isVisible, setIsVisible] = useState(true);
 
   const router = useRouter();

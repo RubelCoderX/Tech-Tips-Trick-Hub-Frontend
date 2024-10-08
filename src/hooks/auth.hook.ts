@@ -74,7 +74,7 @@ export const useUpdateUserRole = () => {
     mutationKey: ["USER_ROLE_UPDATE"],
     mutationFn: async (userId: string) => await userRoleUpdate(userId),
     onSuccess: () => {
-      QueryClient.invalidateQueries("USERS_LIST");
+      QueryClient.invalidateQueries({ queryKey: ["USERS_LIST"] });
       toast.success("User role updated successfully", {
         duration: 1000,
         position: "top-center",

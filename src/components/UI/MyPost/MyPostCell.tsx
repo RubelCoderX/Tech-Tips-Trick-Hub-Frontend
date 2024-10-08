@@ -1,7 +1,11 @@
 import React from "react";
 import { Tooltip, Button } from "@nextui-org/react";
 
-import { TPost } from "@/src/types";
+import UpdatePostModal from "../CreatePost/UpdatePostModal";
+
+import { IUser, TPost } from "@/src/types";
+import { useUser } from "@/src/context/user.provider";
+import { useDeletePost } from "@/src/hooks/post.hooks";
 
 interface IMangeUserCellProps {
   columnKey: string;
@@ -9,6 +13,12 @@ interface IMangeUserCellProps {
 }
 const MyPostCell: React.FC<IMangeUserCellProps> = ({ columnKey, post }) => {
   const cellValue = post[columnKey];
+  const { user } = useUser();
+  const { mutate: deletePost } = useDeletePost();
+
+  const handleDeletePost = (id: string) => {
+    deletePost(id);
+  };
 
   switch (columnKey) {
     // case "name":
@@ -60,7 +70,7 @@ const MyPostCell: React.FC<IMangeUserCellProps> = ({ columnKey, post }) => {
             content={"Are you sure you want to Update this user?"}
           >
             <span className="text-lg text-default-400 cursor-pointer active:opacity-50">
-              <Button className="bg-pink-500 text-white">Update Post</Button>
+              <UpdatePostModal post={post} user={user as IUser} />
             </span>
           </Tooltip>
           <Tooltip>
@@ -71,7 +81,15 @@ const MyPostCell: React.FC<IMangeUserCellProps> = ({ columnKey, post }) => {
             content={"Are you sure you want to delete this post?"}
           >
             <span className="text-lg text-default-400 cursor-pointer active:opacity-50">
-              <Button className="bg-red-600 text-white">Delete Post</Button>
+              <Button
+                className="hover:bg-red-600 hover:text-white duration-300"
+                radius="none"
+                size="lg"
+                variant="bordered"
+                onClick={() => handleDeletePost(post?._id)}
+              >
+                Delete Post
+              </Button>
             </span>
           </Tooltip>
         </div>

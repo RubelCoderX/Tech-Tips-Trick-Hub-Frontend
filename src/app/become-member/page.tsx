@@ -41,8 +41,8 @@ export default function Page() {
 const plans = [
   {
     title: "Basic Plan",
-    expiry: " 2 Days",
-    price: "Free",
+
+    price: "00",
     description:
       "Access member-only stories and enjoy an enhanced reading and writing experience. Cancel anytime.",
     benefits: [
@@ -58,11 +58,12 @@ const plans = [
     expiry: "1 Week",
     price: "299",
     description:
-      "Contribute more to writers and strengthen your support for the Medium community. Cancel anytime.",
+      "Contribute more to writers and strengthen your support for the community. Cancel anytime.",
     benefits: [
       "✓ All Medium member benefits",
-      "✓ Give 4x more to the writers you read",
-      "✓ Share member-only stories with anyone ",
+      "✓ Give 4x more to the writers ",
+      "✓ Share member-only stories ",
+      "✓ Customize app icon",
       "✓ Customize app icon",
     ],
   },

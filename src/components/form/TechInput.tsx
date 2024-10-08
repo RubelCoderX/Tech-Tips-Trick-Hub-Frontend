@@ -1,6 +1,7 @@
 "use client";
 import { Input } from "@nextui-org/input";
 import { useFormContext } from "react-hook-form";
+import { ReactNode } from "react";
 
 import { IInput } from "@/src/types";
 
@@ -10,7 +11,7 @@ interface IProps extends IInput {
   radius: "none" | "sm" | "md" | "lg" | "full";
   required?: boolean;
   type?: string;
-  label?: string;
+  label?: ReactNode;
   name: string;
   endContent?: React.ReactNode;
 }

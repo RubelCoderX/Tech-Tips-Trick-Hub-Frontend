@@ -1,4 +1,4 @@
-import { SVGProps } from "react";
+import { ReactNode, SVGProps } from "react";
 
 export type IconSvgProps = SVGProps<SVGSVGElement> & {
   size?: number;
@@ -8,7 +8,7 @@ export interface IInput {
   size?: "sm" | "md" | "lg";
   required?: boolean;
   type?: string;
-  label?: string;
+  label?: ReactNode;
   name: string;
   disabled?: boolean;
 }
@@ -54,7 +54,8 @@ export interface TPost {
   upVotes: string[];
   downVotes: string[];
   comments: any[];
-  images: string[];
+  thumbnailImage: string;
+  contents: string;
   status: string;
   pdfVersion: string;
   isDeleted: boolean;
@@ -91,4 +92,27 @@ export interface TAuthor {
   updatedAt: string;
   userName: string;
   __v: number;
+}
+
+export interface ICreatePost {
+  title: string;
+  description: string;
+  contents: string;
+  thumbnailImage: string;
+  category: string;
+  tags: string[];
+  pdfVersion?: string;
+  isPremium: boolean;
+  author: string;
+}
+export interface IUpdatePost {
+  title?: string;
+  description?: string;
+  content?: string;
+  thumbnail?: string;
+  category?: string;
+  tags?: string[];
+  pdfVersion?: string;
+  isPremium?: boolean;
+  author?: string;
 }

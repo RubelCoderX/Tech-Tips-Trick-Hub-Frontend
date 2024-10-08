@@ -63,16 +63,18 @@ const Sidebar = () => {
         >
           <div className="h-full flex flex-col">
             <div className="rounded-xl p-4">
-              <h2 className="text-2xl font-semibold font-sans">
-                Gadget Guru Hub
-              </h2>
+              <Link href="/">
+                <h2 className="text-2xl font-semibold font-sans">
+                  Gadget <span className="text-pink-500">Guru Hub</span>
+                </h2>
+              </Link>
             </div>
 
             {/* Divider */}
             <Divider className="my-4" />
 
             {/* Sidebar Links Section */}
-            <div className="mt-3 space-y-2 rounded-xl p-2 flex-1">
+            <div className="mt-3 space-y-5 rounded-xl p-2 flex-1">
               {loading ? (
                 <div className="flex justify-center items-center">
                   <div>
@@ -87,9 +89,9 @@ const Sidebar = () => {
                       key={link.name}
                       className={`flex items-center p-2 rounded-md font-semibold text-xl ${
                         activeLink === link.name
-                          ? "bg-pink-600 text-white"
-                          : "hover:bg-pink-400"
-                      }`}
+                          ? "bg-pink-600 text-white" // Active link
+                          : "bg-white hover:bg-pink-400 text-black" // Inactive, with hover
+                      } shadow-md`} // Add shadow to the entire link
                       href={link.path}
                       onClick={() => handleLinkClick(link.name)}
                     >
@@ -105,18 +107,18 @@ const Sidebar = () => {
           {/* Log Out Section */}
           <div className="py-6 absolute w-full bottom-10">
             <Divider className="mb-2 " />
-            <div className="flex items-center pl-4 ">
-              <span className="mr-2 text-xl">
-                <FaSignOutAlt />
-              </span>
+            <div className="flex items-center p-4 ">
               <button
-                className={`flex items-center p-2 rounded-md font-semibold text-xl  ${
+                className={`flex items-center p-1 w-full rounded-md font-semibold text-xl  ${
                   activeLink === "Log Out"
-                    ? "bg-blue-600 text-white"
-                    : "hover:bg-blue-400"
+                    ? "bg-pink-600 text-white"
+                    : "hover:bg-pink-400 hover:text-white"
                 }`}
                 onClick={() => handleLogOut()}
               >
+                <span className="mr-2 text-xl">
+                  <FaSignOutAlt />
+                </span>
                 Log Out
               </button>
             </div>

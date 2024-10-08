@@ -27,7 +27,7 @@ export default function NewsLayout({ posts, layoutLoading }: PostProps) {
 
   return (
     <div className="flex flex-col lg:flex-row  min-h-screen mt-20">
-      <div className="lg:w-2/3 p-4">
+      <div className="lg:w-10/12 p-4">
         <div>
           <h1 className="text-3xl sm:text-4xl font-bold mb-8 text-pink-500 text-center sm:text-left">
             What&apos;s New
@@ -49,23 +49,26 @@ export default function NewsLayout({ posts, layoutLoading }: PostProps) {
                     alt={post?.title || "Post Image"}
                     className="w-full h-full object-cover"
                     height={140}
-                    src={post?.images[0] || bannerImage}
+                    src={post?.thumbnailImage || bannerImage}
                     width={384}
                   />
                 </div>
               </div>
 
               {/* Text Content */}
-              <div className="p-4 space-y-2 ">
+              <div className="px-8  space-y-2 ">
                 <span className="bg-pink-500 text-white text-xs font-semibold px-2 py-1 uppercase">
                   {post?.category || "Category"}
                 </span>
                 <Link
-                  className="text-xl sm:text-2xl lg:text-3xl block hover:text-pink-500 font-bold mb-2 cursor-pointer hover:underline transition duration-300 ease-in-out max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg"
+                  className="text-xl sm:text-2xl lg:text-2xl block hover:text-pink-500 font-bold mb-2 cursor-pointer hover:underline transition duration-300 ease-in-out max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg"
                   href={`/${post?._id}`}
                 >
                   {post.title || "Post Title"}
                 </Link>
+                <p className="text-sm md:text-base text-gray-600 max-w-xl line-clamp-10">
+                  {post?.description || "Description"}{" "}
+                </p>
 
                 <div className="flex items-center text-xs md:text-sm">
                   <span>By {post?.author?.name || "Author"}</span>

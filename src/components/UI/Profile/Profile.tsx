@@ -12,9 +12,9 @@ export default function Profile() {
   const post = data?.data;
 
   return (
-    <div className="">
+    <div className="container">
       <ProfileHeader />
-      <Divider className="my-8" />
+      <Divider className="my-8 ml-3" />
       <div className="h-[calc(100vh-350px)] overflow-y-auto">
         <ProfilePost
           heroLoading={false}

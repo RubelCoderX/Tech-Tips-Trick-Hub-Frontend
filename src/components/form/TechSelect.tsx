@@ -1,5 +1,6 @@
 import { Select, SelectItem } from "@nextui-org/select";
 import { useFormContext } from "react-hook-form";
+import { ReactNode } from "react";
 
 import { IInput } from "@/src/types";
 
@@ -7,9 +8,10 @@ interface IProps {
   variant?: "underlined" | "faded" | "flat" | "bordered";
   size?: "sm" | "md" | "lg";
   radius: "none" | "sm" | "md" | "lg" | "full";
+  label: ReactNode;
 }
 interface IProps extends IInput {
-  options: { key: string; label: string }[];
+  options: { key: string; label: ReactNode }[];
 }
 
 const TechSelect = ({

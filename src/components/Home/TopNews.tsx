@@ -29,7 +29,7 @@ const TopNews = ({ posts, topLoading }: PostProps) => {
                 alt="Small robot"
                 className="object-cover cursor-pointer w-full h-[250px] transition-transform duration-300 group-hover:scale-110"
                 height={250}
-                src={post.images[0]}
+                src={post?.thumbnailImage}
                 width={400}
               />
             </div>

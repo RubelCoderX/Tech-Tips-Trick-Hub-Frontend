@@ -1,8 +1,11 @@
+import Container from "@/src/components/UI/Container";
+import PaymentHistoryTable from "@/src/components/UI/PaymentHistoryTable/PaymentHistoryTable";
+
 const Page = () => {
   return (
-    <div>
-      <h2>Welcome to the Page Payment</h2>
-    </div>
+    <Container>
+      <PaymentHistoryTable />
+    </Container>
   );
 };
 

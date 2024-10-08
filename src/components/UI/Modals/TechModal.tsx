@@ -13,7 +13,7 @@ import { ReactNode } from "react";
 interface IProps {
   buttonText: string;
   title: string;
-  children: ReactNode;
+  children: ReactNode | ((closeModal: () => void) => ReactNode);
   buttonVariant?:
     | "light"
     | "solid"
@@ -23,7 +23,9 @@ interface IProps {
     | "shadow"
     | "ghost"
     | undefined;
+  buttonRadius?: "none" | "sm" | "md" | "lg" | "full";
   buttonClassName?: string;
+  scrollBehavior?: "inside" | "outside";
   size?:
     | "xs"
     | "sm"
@@ -35,7 +37,7 @@ interface IProps {
     | "4xl"
     | "5xl"
     | "full";
-  bgColor?: string; // Optional prop for custom background color
+  bgColor?: string;
 }
 
 export default function TechModal({
@@ -43,15 +45,22 @@ export default function TechModal({
   title,
   children,
   buttonVariant = "bordered",
+  buttonRadius,
   buttonClassName,
-  size = "2xl",
+  scrollBehavior,
+  size = "3xl",
 }: IProps) {
-  const { isOpen, onOpen, onOpenChange } = useDisclosure();
+  const { isOpen, onOpen, onOpenChange, onClose } = useDisclosure();
+  const closeModal = () => {
+    onClose();
+  };
 
   return (
     <div>
       <Button
         className={buttonClassName}
+        radius={buttonRadius}
+        size="lg"
         variant={buttonVariant}
         onPress={onOpen}
       >
@@ -60,22 +69,33 @@ export default function TechModal({
       <Modal
         className="border"
         isOpen={isOpen}
+        scrollBehavior={scrollBehavior}
         size={size}
         onOpenChange={onOpenChange}
       >
-        <ModalContent
-          className={`
-            rounded-lg
-            bg-white 
-            dark:bg-[#1A1A1A] 
-            light:bg-[#F9F9F9]
-            transition-colors duration-300
-          `} // Light and dark mode background colors
-        >
-          <>
-            <ModalHeader className="flex flex-col gap-1">{title}</ModalHeader>
-            <ModalBody>{children}</ModalBody>
-          </>
+        <ModalContent className="pb-2">
+          {() => (
+            <>
+              <ModalHeader className="flex flex-col gap-1">{title}</ModalHeader>
+              <ModalBody>
+                {typeof children === "function"
+                  ? children(closeModal)
+                  : children}
+              </ModalBody>
+              {/* <ModalFooter>
+                                <Button
+                                    color="danger"
+                                    variant="light"
+                                    onPress={onClose}
+                                >
+                                    Close
+                                </Button>
+                                <Button color="primary" onPress={onClose}>
+                                    Action
+                                </Button>
+                            </ModalFooter> */}
+            </>
+          )}
         </ModalContent>
       </Modal>
     </div>
