@@ -141,9 +141,11 @@ export const votePost = async (postId: string, action: string) => {
     throw new Error(error);
   }
 };
-export const getMyPosts = async () => {
+export const getMyPosts = async ({ searchQuery = "", category = "" }) => {
   try {
-    const { data } = await axiosInstance.get("/post/my-posts");
+    const { data } = await axiosInstance.get("/post/my-posts", {
+      params: { searchQuery, category },
+    });
 
     if (data?.success) {
       revalidateTag("post");

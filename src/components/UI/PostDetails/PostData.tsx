@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable react/jsx-sort-props */
 "use client";
 
 import React, { useState } from "react";
@@ -76,6 +78,7 @@ const PostData = ({ post }: { post: TPost }) => {
     handleEditComment({ postId: post?._id, commentId, comment: { content } });
     setEditingCommentId(null);
   };
+  // p0: string
   const handleFollow = (followingId: string, p0: string) => {
     createFollow(followingId);
   };
@@ -179,7 +182,7 @@ const PostData = ({ post }: { post: TPost }) => {
             </div>
           </CardHeader>
           <CardBody>
-            <div>
+            <div className="prose-sm">
               <div
                 dangerouslySetInnerHTML={{ __html: post?.contents }}
                 className="mb-4"
@@ -214,7 +217,7 @@ const PostData = ({ post }: { post: TPost }) => {
                       e.preventDefault();
                       handleVotes(
                         post?._id,
-                        hasUpvoted ? "removeUpvote" : "upvote",
+                        hasUpvoted ? "removeUpvote" : "upvote"
                       );
                     }
                   }}
@@ -237,7 +240,7 @@ const PostData = ({ post }: { post: TPost }) => {
                       e.preventDefault();
                       handleVotes(
                         post?._id,
-                        hasDownvoted ? "removeDownvote" : "downvote",
+                        hasDownvoted ? "removeDownvote" : "downvote"
                       );
                     }
                   }}
@@ -307,7 +310,7 @@ const PostData = ({ post }: { post: TPost }) => {
                               onClick={() =>
                                 handleEditComments(
                                   comment._id,
-                                  comment?.content,
+                                  comment?.content
                                 )
                               }
                             >

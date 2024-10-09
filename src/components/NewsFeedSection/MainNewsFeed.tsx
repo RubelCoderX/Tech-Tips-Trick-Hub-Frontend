@@ -16,7 +16,7 @@ const MainNewsFeed = () => {
     <div>
       <div className=" w-full  flex-grow">
         <HeroSection heroLoading={isLoading} posts={posts} />
-        <div className="dark dark:bg-[#1A1A1A]">
+        <div>
           <Container>
             <TopNews posts={posts} topLoading={isLoading} />
           </Container>

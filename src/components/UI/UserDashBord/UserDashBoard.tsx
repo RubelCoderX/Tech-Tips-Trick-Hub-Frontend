@@ -30,24 +30,24 @@ export default function UserDashboard() {
       return "Good evening!";
     }
   };
-  const { data } = useGetMyPosts();
+  const { data } = useGetMyPosts({});
 
   const totalPosts = data?.data.length || 0;
   const totalComments =
     data?.data.reduce(
       (acc: any, post: { comments: string | any[] }) =>
         acc + post?.comments?.length,
-      0,
+      0
     ) || 0;
   const totalLikes =
     data?.data.reduce(
       (acc: any, post: { upVotes: string | any[] }) =>
         acc + post?.upVotes?.length,
-      0,
+      0
     ) || 0;
   const totalPremiumPosts =
     data?.data.filter(
-      (post: { isPremium: boolean }) => post?.isPremium === true,
+      (post: { isPremium: boolean }) => post?.isPremium === true
     ).length || 0;
 
   return (

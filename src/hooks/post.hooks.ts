@@ -91,10 +91,10 @@ export const useVotePost = () => {
     },
   });
 };
-export const useGetMyPosts = () => {
+export const useGetMyPosts = ({ searchQuery = "", category = "" }) => {
   return useQuery({
-    queryKey: ["my-posts"],
-    queryFn: async () => await getMyPosts(),
+    queryKey: ["my-posts", { searchQuery, category }],
+    queryFn: async () => await getMyPosts({ searchQuery, category }),
   });
 };
 

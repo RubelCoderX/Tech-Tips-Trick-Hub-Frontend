@@ -1,15 +1,22 @@
 "use client";
 import Image from "next/image";
-import { CalendarIcon } from "lucide-react";
+import { CalendarIcon, Crown } from "lucide-react";
 import { FaRegComment, FaVoteYea } from "react-icons/fa";
 import Link from "next/link";
-import { Divider } from "@nextui-org/react";
+import {
+  Card,
+  CardBody,
+  CardFooter,
+  CardHeader,
+  Divider,
+} from "@nextui-org/react";
 import { Input, Select, SelectItem } from "@nextui-org/react";
 import { useCallback, useMemo, useState } from "react";
-import { debounce, set } from "lodash";
+import { debounce } from "lodash";
 
 import bannerImage from "../../assets/watch.jpg";
-import LayoutSkeleton from "../UI/Skeleton/LayoutSkeleton";
+
+// import LayoutSkeleton from "../UI/Skeleton/LayoutSkeleton";
 import { categoryOptions } from "@/src/constant";
 import { useGetLowestLikedPosts } from "@/src/hooks/post.hooks";
 import { TPost } from "@/src/types";
@@ -18,7 +25,7 @@ export default function NewsLayout() {
   const [searchQuery, setSearchQuery] = useState("");
   const [category, setCategory] = useState("");
 
-  const { data, isLoading } = useGetLowestLikedPosts({ searchQuery, category });
+  const { data } = useGetLowestLikedPosts({ searchQuery, category });
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const posts = useMemo(() => data?.data?.lowestLikedPosts || [], [data]);
   const debouncedSearch = useCallback(
@@ -31,16 +38,16 @@ export default function NewsLayout() {
     debouncedSearch(e.target.value);
   };
 
-  if (isLoading) {
-    return (
-      <div>
-        <h2>Loading....</h2>
-      </div>
-    );
-  }
+  // if (isLoading) {
+  //   return (
+  //     <div>
+  //       <h2>Loading....</h2>
+  //     </div>
+  //   );
+  // }
 
   return (
-    <div className="flex flex-col lg:flex-row mt-20">
+    <div className="flex flex-col lg:flex-row mt-10 mb-10 dark ">
       <div className="lg:w-10/12 md:p-4 p-2">
         <div>
           <h1 className="text-3xl sm:text-4xl font-bold mb-8 text-pink-500 text-center sm:text-left">
@@ -114,9 +121,11 @@ export default function NewsLayout() {
       </div>
 
       {/* Sidebar */}
-      <aside className="lg:w-1/4 lg:sticky    md:pt-16 p-4">
-        <div className="mb-6">
+      <aside className="lg:w-1/4 lg:sticky md:pt-16 p-4">
+        <div className="mb-6 ">
+          <h3 className="text-xl font-bold mb-3">Enter keywords to search</h3>
           <Input
+            className="light light:bg-[#F9F9F9]"
             label="Search here..."
             name="search"
             radius="none"
@@ -127,10 +136,10 @@ export default function NewsLayout() {
         </div>
 
         {/* Categories Section */}
-        <div className="mb-6">
+        <div className="mb-6 ">
           <h3 className="text-xl font-bold mb-3">Categories</h3>
           <Select
-            className="w-full"
+            className="w-full light light:bg-[#F9F9F9]"
             label="Select a category"
             placeholder="Choose a category"
             radius="none"
@@ -145,20 +154,32 @@ export default function NewsLayout() {
           </Select>
         </div>
 
-        {/* Rating Filter Section */}
-        <div>
-          <h3 className="text-xl font-bold mb-3">Filter by Likes</h3>
-          <div className="flex flex-wrap gap-2">
-            {[500, 400, 300, 200, 100].map((rating) => (
-              <button
-                key={rating}
-                className="bg-gray-700 hover:bg-gray-600 text-white px-3 py-1 rounded"
-              >
-                {rating}+ Likes
-              </button>
-            ))}
-          </div>
-        </div>
+        <Card className="bg-gradient-to-r from-purple-500 to-pink-500 text-white">
+          <CardHeader>
+            <h3 className="text-xl font-bold flex items-center">
+              <Crown className="mr-2" />
+              Upgrade to Premium
+            </h3>
+          </CardHeader>
+          <CardBody>
+            <p className="mb-4">
+              Unlock exclusive features and content with our premium membership!
+            </p>
+            <ul className="list-disc list-inside mb-4">
+              <li>Ad-free experience</li>
+              <li>Exclusive content</li>
+              <li>Priority support</li>
+            </ul>
+          </CardBody>
+          <CardFooter>
+            <Link
+              className="w-full bg-white text-purple-600 hover:bg-gray-100"
+              href={""}
+            >
+              Upgrade Now
+            </Link>
+          </CardFooter>
+        </Card>
       </aside>
     </div>
   );

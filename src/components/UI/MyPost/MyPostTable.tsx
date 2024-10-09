@@ -7,10 +7,10 @@ import {
   TableBody,
   TableRow,
   TableCell,
-  Spinner,
   Input,
 } from "@nextui-org/react";
-import React from "react";
+import React, { useCallback, useState } from "react";
+import { debounce } from "lodash";
 
 import TechModal from "../Modals/TechModal";
 import CreatePost from "../CreatePost/CreatePost";
@@ -23,16 +23,29 @@ import { IUser, TPost } from "@/src/types";
 import { categories } from "@/src/constant";
 import { useUser } from "@/src/context/user.provider";
 export default function MyPostTable() {
-  const { data, isLoading, error } = useGetMyPosts();
+  const [searchQuery, setSearchQuery] = useState("");
+  const [category, setCategory] = useState("");
+
+  const { data, error } = useGetMyPosts({ searchQuery, category });
   const { user } = useUser();
 
-  if (isLoading) {
-    return (
-      <div className="text-center my-auto">
-        <Spinner color="primary" label="Loading..." labelColor="primary" />
-      </div>
-    );
-  }
+  const debouncedSearch = useCallback(
+    debounce((value) => {
+      setSearchQuery(value);
+    }, 300),
+    [],
+  );
+  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+    debouncedSearch(e.target.value);
+  };
+
+  // if (isLoading) {
+  //   return (
+  //     <div className="text-center my-auto">
+  //       <Spinner color="primary" label="Loading..." labelColor="primary" />
+  //     </div>
+  //   );
+  // }
   if (error) {
     return (
       <div className="text-center text-danger">
@@ -64,6 +77,7 @@ export default function MyPostTable() {
                 radius="none"
                 size="lg"
                 variant="bordered"
+                onChange={handleSearch}
               />
             </div>
             <div className="w-full sm:w-auto flex-grow sm:mr-4">
@@ -73,6 +87,7 @@ export default function MyPostTable() {
                 radius="none"
                 size="lg"
                 variant="bordered"
+                onChange={(e) => setCategory(e.target.value)}
               >
                 {(category) => (
                   <SelectItem key={category?.key} variant="bordered">

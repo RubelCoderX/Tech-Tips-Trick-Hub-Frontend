@@ -8,7 +8,7 @@ import { useGetMyPosts } from "@/src/hooks/post.hooks";
 import ProfileHeader from "./ProfileHeader";
 
 export default function Profile() {
-  const { data, isLoading } = useGetMyPosts();
+  const { data, isLoading } = useGetMyPosts({});
   const post = data?.data;
 
   return (
