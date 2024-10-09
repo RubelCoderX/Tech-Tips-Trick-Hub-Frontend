@@ -17,6 +17,7 @@ import {
   Avatar,
   Button,
   Divider,
+  Link,
 } from "@nextui-org/react";
 import { FaVoteYea } from "react-icons/fa";
 import { useRouter } from "next/navigation";
@@ -75,7 +76,7 @@ const PostData = ({ post }: { post: TPost }) => {
     handleEditComment({ postId: post?._id, commentId, comment: { content } });
     setEditingCommentId(null);
   };
-  const handleFollow = (followingId: string) => {
+  const handleFollow = (followingId: string, p0: string) => {
     createFollow(followingId);
   };
   const handleVotes = (postId: string, action: string) => {
@@ -147,15 +148,27 @@ const PostData = ({ post }: { post: TPost }) => {
                   <>
                     {post?.author?.followers?.includes(user?._id) ? (
                       <button
-                        className=" text-blue-600 text-xl font-semibold font-sans hover:underline duration-300"
-                        onClick={() => handleFollow(post?.author?._id)}
+                        className="text-blue-600 text-xl font-semibold font-sans hover:underline duration-300"
+                        onClick={() => {
+                          if (user) {
+                            handleFollow(post?.author?._id, "unfollow");
+                          } else {
+                            window.location.href = `/login?redirect=/${post?._id}`;
+                          }
+                        }}
                       >
                         Following
                       </button>
                     ) : (
                       <button
-                        className=" text-blue-500 text-xl font-semibold font-sans hover:underline duration-300"
-                        onClick={() => handleFollow(post?.author?._id)}
+                        className="text-blue-500 text-xl font-semibold font-sans hover:underline duration-300"
+                        onClick={() => {
+                          if (user) {
+                            handleFollow(post?.author?._id, "follow");
+                          } else {
+                            window.location.href = `/login?redirect=/${post?._id}`;
+                          }
+                        }}
                       >
                         Follow
                       </button>
@@ -187,37 +200,47 @@ const PostData = ({ post }: { post: TPost }) => {
               </div>
               <div className="flex items-center space-x-2">
                 <Button
+                  as={Link}
                   className={`${
                     hasUpvoted
                       ? "bg-blue-500 text-white"
                       : "text-blue-500 border-blue-500"
                   }`}
+                  href={user ? "#" : `/login?redirect=/${post?._id}`}
                   size="sm"
                   variant="bordered"
-                  onClick={() =>
-                    handleVotes(
-                      post?._id,
-                      hasUpvoted ? "removeUpvote" : "upvote",
-                    )
-                  }
+                  onClick={(e) => {
+                    if (user) {
+                      e.preventDefault();
+                      handleVotes(
+                        post?._id,
+                        hasUpvoted ? "removeUpvote" : "upvote",
+                      );
+                    }
+                  }}
                 >
                   <ThumbsUp className={"w-4 h-4 mr-2 "} />
                   Like
                 </Button>
                 <Button
+                  as={Link}
                   className={`${
                     hasDownvoted
                       ? "bg-red-500 text-white"
                       : "text-red-500 border-red-500"
                   }`}
+                  href={user ? "#" : `/login?redirect=/${post?._id}`}
                   size="sm"
                   variant="bordered"
-                  onClick={() =>
-                    handleVotes(
-                      post?._id,
-                      hasDownvoted ? "removeDownvote" : "downvote",
-                    )
-                  }
+                  onClick={(e) => {
+                    if (user) {
+                      e.preventDefault();
+                      handleVotes(
+                        post?._id,
+                        hasDownvoted ? "removeDownvote" : "downvote",
+                      );
+                    }
+                  }}
                 >
                   <ThumbsDown className={"w-4 h-4 mr-2"} />
                   Dislike
@@ -227,7 +250,7 @@ const PostData = ({ post }: { post: TPost }) => {
           </div>
         </Card>
 
-        <Card className="mt-8 p-4 " id="comment">
+        <Card className="mt-8 p-4" id="comment">
           <CardHeader>
             <h2 className="text-2xl font-semibold">Comments</h2>
           </CardHeader>
@@ -315,15 +338,34 @@ const PostData = ({ post }: { post: TPost }) => {
               radius="none"
               variant="bordered"
             />
-            <Button
-              className="mt-4"
-              radius="none"
-              size="sm"
-              type="submit"
-              variant="bordered"
-            >
-              {isPending && isSuccess ? "Posting..." : "Post Comment"}
-            </Button>
+
+            {user ? (
+              <Button
+                className="mt-4"
+                content="plese Login to comment"
+                radius="none"
+                size="sm"
+                type="submit"
+                variant="bordered"
+                // disabled={!user || (isPending && !isSuccess)}
+              >
+                {isPending && isSuccess ? "Posting..." : "Post Comment"}
+              </Button>
+            ) : (
+              <Button
+                as={Link}
+                className="mt-4"
+                content="plese Login to comment"
+                radius="none"
+                size="sm"
+                type="submit"
+                variant="bordered"
+                href={`/login?redirect=/${post?._id}`}
+                // disabled={!user || (isPending && !isSuccess)}
+              >
+                {isPending && isSuccess ? "Posting..." : "Post Comment"}
+              </Button>
+            )}
           </TechForm>
         </Card>
       </div>

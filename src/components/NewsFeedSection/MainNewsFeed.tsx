@@ -3,62 +3,22 @@ import React from "react";
 
 import HeroSection from "../Home/HeroSection";
 import TopNews from "../Home/TopNews";
-import NewsLayout from "../Home/NewsLayout";
 import Container from "../UI/Container";
 
-import { useGetAllPosts } from "@/src/hooks/post.hooks";
+import { useGetMostLikedPosts } from "@/src/hooks/post.hooks";
 
 const MainNewsFeed = () => {
-  const { data, isLoading } = useGetAllPosts();
-  const allPostData = data?.data || [];
+  const { data, isLoading } = useGetMostLikedPosts();
 
-  // Sort posts by upvotes
-  // const sortedPosts = allPostData.sort(
-  //   (a, b) => b.upVotes.length - a.upVotes.length
-  // );
-
-  const sortedPosts = allPostData.sort(
-    (
-      a: { upVotes: string | any[]; downVotes: string | any[] },
-      b: { upVotes: string | any[]; downVotes: string | any[] },
-    ) => {
-      const upvoteDifference = b.upVotes.length - a.upVotes.length;
-
-      if (upvoteDifference !== 0) {
-        return upvoteDifference;
-      }
-
-      return a.downVotes.length - b.downVotes.length;
-    },
-  );
+  const posts = data?.data?.mostLikedPosts || [];
 
   return (
     <div>
       <div className=" w-full  flex-grow">
-        <HeroSection
-          heroLoading={isLoading}
-          layoutLoading={false}
-          postLoading={false}
-          posts={sortedPosts}
-          topLoading={false}
-        />
+        <HeroSection heroLoading={isLoading} posts={posts} />
         <div className="dark dark:bg-[#1A1A1A]">
           <Container>
-            <TopNews
-              heroLoading={false}
-              layoutLoading={false}
-              postLoading={false}
-              posts={sortedPosts}
-              topLoading={isLoading}
-            />
-            {/* <BannerSection /> */}
-            <NewsLayout
-              heroLoading={false}
-              layoutLoading={isLoading}
-              postLoading={false}
-              posts={sortedPosts}
-              topLoading={false}
-            />
+            <TopNews posts={posts} topLoading={isLoading} />
           </Container>
         </div>
       </div>

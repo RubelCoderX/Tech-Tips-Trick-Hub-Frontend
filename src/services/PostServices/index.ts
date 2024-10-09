@@ -5,10 +5,55 @@ import axiosInstance from "@/src/lib/AxiosInstence";
 import { envConfig } from "@/src/config/envConfig";
 import { ICreatePost, IUpdatePost } from "@/src/types";
 
-export const getAllPosts = async () => {
-  const res = await axiosInstance.get("/post");
+// export const getAllPosts = async ({ searchQuery, category }) => {
+//   const params = {};
 
-  return res.data;
+//   console.log(params);
+
+//   if (searchQuery) {
+//     params.searchQuery = searchQuery;
+//   }
+
+//   if (category) {
+//     params.category = category;
+//   }
+
+//   const res = await axiosInstance.get("/post", { params });
+
+//   return res.data;
+// };
+
+export const getMostLikedPosts = async () => {
+  try {
+    const { data } = await axiosInstance.get("/post/most-liked");
+
+    if (data?.success) {
+      revalidateTag("post");
+    }
+
+    return data;
+  } catch (error: any) {
+    throw new Error(error);
+  }
+};
+
+export const getLowestLikedPosts = async ({
+  searchQuery = "",
+  category = "",
+}) => {
+  try {
+    const { data } = await axiosInstance.get("/post/lowest-liked", {
+      params: { searchQuery, category },
+    });
+
+    if (data?.success) {
+      revalidateTag("post");
+    }
+
+    return data;
+  } catch (error: any) {
+    throw new Error(error);
+  }
 };
 
 export const getPostById = async (postId: string) => {

@@ -1,4 +1,4 @@
-  <div align="center"> <a href="https://tech-tips-trick-hub-frontend-lac.vercel.app/" target="_blank" style="text-decoration: none; color: inherit;">
+  <div align="center"> <a href="https://tech-tips-trick-hub-frontend-lac.vercel.app" target="_blank" style="text-decoration: none; color: inherit;">
       🚀 Tech Tips & Tricks Hub
     </a></div>
 

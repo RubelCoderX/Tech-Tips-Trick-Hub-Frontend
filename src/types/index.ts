@@ -66,10 +66,12 @@ export interface TPost {
 }
 export interface PostProps {
   posts: TPost[];
-  heroLoading: boolean;
-  layoutLoading: boolean;
-  topLoading: boolean;
-  postLoading: boolean;
+  heroLoading?: boolean;
+  layoutLoading?: boolean;
+  topLoading?: boolean;
+  postLoading?: boolean;
+  setCategory?: (category: string) => void;
+  setSearchQuery?: (searchQuery: string) => void;
 }
 
 export interface TAuthor {

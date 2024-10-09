@@ -8,7 +8,8 @@ import {
   deleteComment,
   deletePost,
   editComment,
-  getAllPosts,
+  getLowestLikedPosts,
+  getMostLikedPosts,
   getMyPosts,
   updatePost,
   votePost,
@@ -60,10 +61,24 @@ export const useEditComment = () => {
   });
 };
 
-export const useGetAllPosts = () => {
+// export const useGetAllPosts = ({ searchQuery, category }) => {
+//   return useQuery({
+//     queryKey: ["all-posts", { searchQuery, category }],
+//     queryFn: async () => await getAllPosts({ searchQuery, category }),
+//   });
+// };
+
+export const useGetMostLikedPosts = () => {
   return useQuery({
-    queryKey: ["all-posts"],
-    queryFn: async () => await getAllPosts(),
+    queryKey: ["most-liked-posts"],
+    queryFn: async () => await getMostLikedPosts(),
+  });
+};
+
+export const useGetLowestLikedPosts = ({ searchQuery = "", category = "" }) => {
+  return useQuery({
+    queryKey: ["lowest-liked-posts", { searchQuery, category }],
+    queryFn: async () => await getLowestLikedPosts({ searchQuery, category }),
   });
 };
 
